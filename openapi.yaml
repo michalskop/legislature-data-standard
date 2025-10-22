@@ -1,0 +1,13 @@
+openapi: 3.0.3
+info:
+  title: Legislature Data Standard
+  version: popolo
+  description: |
+    Version **popolo** of the standard. Includes a Popolo-compatible Person schema.
+
+paths: {}
+
+components:
+  schemas:
+    PopoloPerson:
+      $ref: "./schemas/person.popolo.json"

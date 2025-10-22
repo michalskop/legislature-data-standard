@@ -1,0 +1,31 @@
+{
+  "name": "legislature-data-standard",
+  "version": "1.0.0",
+  "description": "A Popolo-compatible, Redoc-rendered specification for parliamentary/legislature data used across CZ Parliament, EU, and regional assemblies. Versioned on GitHub Pages.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:schemas": "tsx scripts/build.ts",
+    "build:openapi": "node scripts/write-openapi.js",
+    "release": "node scripts/release.js",
+    "build": "npm run build:schemas && npm run build:openapi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michalskop/legislature-data-standard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michalskop/legislature-data-standard/issues"
+  },
+  "homepage": "https://github.com/michalskop/legislature-data-standard#readme",
+  "devDependencies": {
+    "tsx": "^4.20.6",
+    "zod-to-json-schema": "^3.24.6"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  }
+}
