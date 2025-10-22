@@ -1,0 +1,60 @@
+name: Build & Deploy (Redoc OSS)
+
+on:
+  workflow_dispatch:
+    inputs:
+      std_version:
+        description: "Version label (e.g. popolo, v1, v1.1)"
+        required: true
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm ci || npm i
+
+      - name: Build schemas
+        run: npm run build:schemas
+
+      - name: Build OpenAPI spec
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            STD_VERSION=${{ inputs.std_version }} npm run build:openapi
+          else
+            STD_VERSION=latest npm run build:openapi
+          fi
+
+      - name: Assemble dist
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            STD_VERSION=${{ inputs.std_version }} npm run release
+          else
+            STD_VERSION=latest npm run release
+          fi
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
