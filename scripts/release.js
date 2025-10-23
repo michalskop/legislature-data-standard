@@ -2,12 +2,24 @@ const fs = require("fs");
 const path = require("path");
 
 const version = process.env.STD_VERSION || "latest";
-const dest = path.join("dist", version);
+const branch  = process.env.STD_BRANCH  || ""; // e.g. "popolo", "dt", "dt.cz.psp"
 
-fs.rmSync("dist", { recursive: true, force: true });
-fs.mkdirSync(dest, { recursive: true });
+/** copy src -> dst recursively */
+function copyTree(src, dst) {
+  fs.mkdirSync(dst, { recursive: true });
+  for (const f of fs.readdirSync(src)) {
+    const s = path.join(src, f);
+    const d = path.join(dst, f);
+    if (fs.lstatSync(s).isDirectory()) copyTree(s, d);
+    else fs.copyFileSync(s, d);
+  }
+}
+/** rm -rf path if exists */
+function rimraf(p) {
+  fs.rmSync(p, { recursive: true, force: true });
+}
 
-// choose JSON first, fallback to YAML
+// choose spec
 const specFile = fs.existsSync("openapi.json") ? "openapi.json"
                : fs.existsSync("openapi.yaml") ? "openapi.yaml"
                : null;
@@ -16,28 +28,43 @@ if (!specFile) {
   process.exit(1);
 }
 
-// copy root assets
-for (const f of ["index.html", specFile]) {
-  fs.copyFileSync(f, path.join(dest, f));
-}
-
-// copy schemas
-fs.mkdirSync(path.join(dest, "schemas"), { recursive: true });
+// stage current build
+rimraf("stage");
+fs.mkdirSync("stage/schemas", { recursive: true });
+fs.copyFileSync("index.html", "stage/index.html");
+fs.copyFileSync(specFile, `stage/${specFile}`);
 for (const f of fs.readdirSync("schemas")) {
-  fs.copyFileSync(path.join("schemas", f), path.join(dest, "schemas", f));
+  fs.copyFileSync(path.join("schemas", f), path.join("stage", "schemas", f));
 }
 
-// also publish latest/
-if (version !== "latest") {
-  const latest = path.join("dist", "latest");
-  fs.mkdirSync(latest, { recursive: true });
-  for (const f of ["index.html", specFile]) {
-    fs.copyFileSync(path.join(dest, f), path.join(latest, f));
-  }
-  fs.mkdirSync(path.join(latest, "schemas"), { recursive: true });
-  for (const f of fs.readdirSync(path.join(dest, "schemas"))) {
-    fs.copyFileSync(path.join(dest, "schemas", f), path.join(latest, "schemas", f));
-  }
+// targets
+const destBase   = branch ? path.join("dist", branch) : "dist";
+const destVer    = path.join(destBase, version);
+const destLatest = path.join(destBase, "latest");
+
+// refresh only this branch/version
+rimraf(destVer);
+copyTree("stage", destVer);
+
+rimraf(destLatest);
+copyTree("stage", destLatest);
+
+// also publish convenience /latest at root when using branches
+if (branch) {
+  rimraf(path.join("dist", "latest"));
+  copyTree("stage", path.join("dist", "latest"));
+
+  // write a simple redirect at branch root -> branch/latest/
+  const redirect = `<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Redirecting…</title>
+<meta http-equiv="refresh" content="0; url=./latest/">
+<link rel="canonical" href="./latest/">
+<script>location.replace('./latest/' + location.hash);</script>`;
+  fs.writeFileSync(path.join(destBase, "index.html"), redirect);
 }
 
-console.log(`Prepared dist/${version} (and dist/latest) using ${specFile}`);
+// cleanup stage
+rimraf("stage");
+
+console.log(`Published to ${destVer} and ${destLatest}${branch ? " (and /latest)" : ""} using ${specFile}`);
