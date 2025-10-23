@@ -1,0 +1,33 @@
+{
+  "$ref": "#/definitions/PopoloVote",
+  "definitions": {
+    "PopoloVote": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "voter_id": {
+          "type": "string",
+          "description": "Person id (or org id when applicable)"
+        },
+        "option": {
+          "type": "string",
+          "description": "e.g., yes, no, abstain, absent, not voting"
+        },
+        "role": {
+          "type": "string",
+          "description": "e.g., Speaker, Acting"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "option"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

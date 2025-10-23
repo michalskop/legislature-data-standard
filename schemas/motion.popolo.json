@@ -1,0 +1,87 @@
+{
+  "$ref": "#/definitions/PopoloMotion",
+  "definitions": {
+    "PopoloMotion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "identifier": {
+          "type": "string",
+          "description": "Legislative identifier"
+        },
+        "organization_id": {
+          "type": "string",
+          "description": "Sponsoring or deciding organization"
+        },
+        "date": {
+          "type": "string",
+          "description": "YYYY-MM-DD"
+        },
+        "text": {
+          "type": "string",
+          "description": "Motion text"
+        },
+        "classification": {
+          "type": "string",
+          "description": "e.g., passage, amendment, appointment"
+        },
+        "result": {
+          "type": "string",
+          "description": "e.g., passed, failed"
+        },
+        "requirement": {
+          "type": "string",
+          "description": "e.g., simple majority"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

@@ -3,9 +3,77 @@
   "info": {
     "title": "Legislature Data Standard",
     "version": "popolo",
-    "description": "Version **popolo**. 4 schema(s)."
+    "description": "Version **popolo**. 13 schema(s)."
   },
   "paths": {
+    "/_schemas/area-popolo": {
+      "get": {
+        "summary": "Schema: area.popolo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/area.popolo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/contact-detail-popolo": {
+      "get": {
+        "summary": "Schema: contact-detail.popolo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/contact-detail.popolo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/count-popolo": {
+      "get": {
+        "summary": "Schema: count.popolo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/count.popolo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/event-popolo": {
+      "get": {
+        "summary": "Schema: event.popolo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/event.popolo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/_schemas/membership-popolo": {
       "get": {
         "summary": "Schema: membership.popolo",
@@ -16,6 +84,40 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/membership.popolo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/motion-popolo": {
+      "get": {
+        "summary": "Schema: motion.popolo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/motion.popolo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/name-component-popolo": {
+      "get": {
+        "summary": "Schema: name-component.popolo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/name-component.popolo"
                 }
               }
             }
@@ -73,10 +175,577 @@
           }
         }
       }
+    },
+    "/_schemas/speech-popolo": {
+      "get": {
+        "summary": "Schema: speech.popolo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/speech.popolo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/vote-event-popolo": {
+      "get": {
+        "summary": "Schema: vote-event.popolo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/vote-event.popolo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/vote-popolo": {
+      "get": {
+        "summary": "Schema: vote.popolo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/vote.popolo"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "area.popolo": {
+        "definitions": {
+          "PopoloArea": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "other_names": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "type": "string"
+                    },
+                    "end_date": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "identifiers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "scheme": {
+                      "type": "string"
+                    },
+                    "identifier": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "scheme",
+                    "identifier"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "classification": {
+                "type": "string",
+                "description": "e.g., constituency, district, region"
+              },
+              "parent_id": {
+                "type": "string"
+              },
+              "geometry": {
+                "description": "GeoJSON object"
+              },
+              "bbox": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 4,
+                "maxItems": 4,
+                "description": "[west, south, east, north]"
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "other_names": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "start_date": {
+                  "type": "string"
+                },
+                "end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "scheme": {
+                  "type": "string"
+                },
+                "identifier": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "scheme",
+                "identifier"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "classification": {
+            "type": "string",
+            "description": "e.g., constituency, district, region"
+          },
+          "parent_id": {
+            "type": "string"
+          },
+          "geometry": {
+            "description": "GeoJSON object"
+          },
+          "bbox": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 4,
+            "maxItems": 4,
+            "description": "[west, south, east, north]"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "contact-detail.popolo": {
+        "definitions": {
+          "PopoloContactDetail": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "e.g., email, phone, address, fax, web"
+              },
+              "value": {
+                "type": "string",
+                "description": "The contact value, e.g., address text, email address"
+              },
+              "label": {
+                "type": "string",
+                "description": "e.g., Constituency office"
+              },
+              "note": {
+                "type": "string"
+              },
+              "valid_from": {
+                "type": "string",
+                "description": "YYYY-MM-DD"
+              },
+              "valid_until": {
+                "type": "string",
+                "description": "YYYY-MM-DD"
+              }
+            },
+            "required": [
+              "type",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "e.g., email, phone, address, fax, web"
+          },
+          "value": {
+            "type": "string",
+            "description": "The contact value, e.g., address text, email address"
+          },
+          "label": {
+            "type": "string",
+            "description": "e.g., Constituency office"
+          },
+          "note": {
+            "type": "string"
+          },
+          "valid_from": {
+            "type": "string",
+            "description": "YYYY-MM-DD"
+          },
+          "valid_until": {
+            "type": "string",
+            "description": "YYYY-MM-DD"
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ],
+        "additionalProperties": false
+      },
+      "count.popolo": {
+        "definitions": {
+          "PopoloCount": {
+            "type": "object",
+            "properties": {
+              "option": {
+                "type": "string",
+                "description": "e.g., yes, no, abstain, absent, not voting"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "option",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "option": {
+            "type": "string",
+            "description": "e.g., yes, no, abstain, absent, not voting"
+          },
+          "value": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "option",
+          "value"
+        ],
+        "additionalProperties": false
+      },
+      "event.popolo": {
+        "definitions": {
+          "PopoloEvent": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "start_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD or ISO datetime"
+              },
+              "end_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD or ISO datetime"
+              },
+              "location": {
+                "type": "string"
+              },
+              "classification": {
+                "type": "string",
+                "description": "e.g., session, sitting, hearing"
+              },
+              "organization_id": {
+                "type": "string"
+              },
+              "parent_id": {
+                "type": "string"
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD or ISO datetime"
+          },
+          "end_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD or ISO datetime"
+          },
+          "location": {
+            "type": "string"
+          },
+          "classification": {
+            "type": "string",
+            "description": "e.g., session, sitting, hearing"
+          },
+          "organization_id": {
+            "type": "string"
+          },
+          "parent_id": {
+            "type": "string"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
       "membership.popolo": {
         "definitions": {
           "PopoloMembership": {
@@ -312,6 +981,252 @@
           },
           "updated_at": {
             "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "motion.popolo": {
+        "definitions": {
+          "PopoloMotion": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "identifier": {
+                "type": "string",
+                "description": "Legislative identifier"
+              },
+              "organization_id": {
+                "type": "string",
+                "description": "Sponsoring or deciding organization"
+              },
+              "date": {
+                "type": "string",
+                "description": "YYYY-MM-DD"
+              },
+              "text": {
+                "type": "string",
+                "description": "Motion text"
+              },
+              "classification": {
+                "type": "string",
+                "description": "e.g., passage, amendment, appointment"
+              },
+              "result": {
+                "type": "string",
+                "description": "e.g., passed, failed"
+              },
+              "requirement": {
+                "type": "string",
+                "description": "e.g., simple majority"
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Legislative identifier"
+          },
+          "organization_id": {
+            "type": "string",
+            "description": "Sponsoring or deciding organization"
+          },
+          "date": {
+            "type": "string",
+            "description": "YYYY-MM-DD"
+          },
+          "text": {
+            "type": "string",
+            "description": "Motion text"
+          },
+          "classification": {
+            "type": "string",
+            "description": "e.g., passage, amendment, appointment"
+          },
+          "result": {
+            "type": "string",
+            "description": "e.g., passed, failed"
+          },
+          "requirement": {
+            "type": "string",
+            "description": "e.g., simple majority"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "name-component.popolo": {
+        "definitions": {
+          "PopoloNameComponent": {
+            "type": "object",
+            "properties": {
+              "family_name": {
+                "type": "string"
+              },
+              "given_name": {
+                "type": "string"
+              },
+              "additional_name": {
+                "type": "string"
+              },
+              "honorific_prefix": {
+                "type": "string"
+              },
+              "honorific_suffix": {
+                "type": "string"
+              },
+              "patronymic_name": {
+                "type": "string"
+              },
+              "sort_name": {
+                "type": "string",
+                "description": "Sort-as name (family, given)"
+              },
+              "note": {
+                "type": "string"
+              },
+              "start_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD"
+              },
+              "end_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "family_name": {
+            "type": "string"
+          },
+          "given_name": {
+            "type": "string"
+          },
+          "additional_name": {
+            "type": "string"
+          },
+          "honorific_prefix": {
+            "type": "string"
+          },
+          "honorific_suffix": {
+            "type": "string"
+          },
+          "patronymic_name": {
+            "type": "string"
+          },
+          "sort_name": {
+            "type": "string",
+            "description": "Sort-as name (family, given)"
+          },
+          "note": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD"
+          },
+          "end_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD"
           }
         },
         "additionalProperties": false
@@ -1206,6 +2121,409 @@
         "required": [
           "label",
           "organization_id"
+        ],
+        "additionalProperties": false
+      },
+      "speech.popolo": {
+        "definitions": {
+          "PopoloSpeech": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string",
+                "description": "Transcript text"
+              },
+              "audio": {
+                "type": "string",
+                "format": "uri"
+              },
+              "video": {
+                "type": "string",
+                "format": "uri"
+              },
+              "speaker_id": {
+                "type": "string",
+                "description": "Person id of the speaker"
+              },
+              "on_behalf_of_id": {
+                "type": "string",
+                "description": "Organization on whose behalf the speech is made"
+              },
+              "event_id": {
+                "type": "string",
+                "description": "Related Event id"
+              },
+              "date": {
+                "type": "string",
+                "description": "YYYY-MM-DD or ISO datetime"
+              },
+              "language": {
+                "type": "string"
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "text"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string",
+            "description": "Transcript text"
+          },
+          "audio": {
+            "type": "string",
+            "format": "uri"
+          },
+          "video": {
+            "type": "string",
+            "format": "uri"
+          },
+          "speaker_id": {
+            "type": "string",
+            "description": "Person id of the speaker"
+          },
+          "on_behalf_of_id": {
+            "type": "string",
+            "description": "Organization on whose behalf the speech is made"
+          },
+          "event_id": {
+            "type": "string",
+            "description": "Related Event id"
+          },
+          "date": {
+            "type": "string",
+            "description": "YYYY-MM-DD or ISO datetime"
+          },
+          "language": {
+            "type": "string"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "vote-event.popolo": {
+        "definitions": {
+          "PopoloVoteEvent": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "identifier": {
+                "type": "string",
+                "description": "Roll call or journal id"
+              },
+              "motion_id": {
+                "type": "string"
+              },
+              "organization_id": {
+                "type": "string"
+              },
+              "start_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD or ISO datetime"
+              },
+              "end_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD or ISO datetime"
+              },
+              "result": {
+                "type": "string",
+                "description": "e.g., passed, failed"
+              },
+              "counts": {
+                "type": "array",
+                "description": "See Count objects"
+              },
+              "votes": {
+                "type": "array",
+                "description": "See Vote objects"
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Roll call or journal id"
+          },
+          "motion_id": {
+            "type": "string"
+          },
+          "organization_id": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD or ISO datetime"
+          },
+          "end_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD or ISO datetime"
+          },
+          "result": {
+            "type": "string",
+            "description": "e.g., passed, failed"
+          },
+          "counts": {
+            "type": "array",
+            "description": "See Count objects"
+          },
+          "votes": {
+            "type": "array",
+            "description": "See Vote objects"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "vote.popolo": {
+        "definitions": {
+          "PopoloVote": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "voter_id": {
+                "type": "string",
+                "description": "Person id (or org id when applicable)"
+              },
+              "option": {
+                "type": "string",
+                "description": "e.g., yes, no, abstain, absent, not voting"
+              },
+              "role": {
+                "type": "string",
+                "description": "e.g., Speaker, Acting"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "option"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "voter_id": {
+            "type": "string",
+            "description": "Person id (or org id when applicable)"
+          },
+          "option": {
+            "type": "string",
+            "description": "e.g., yes, no, abstain, absent, not voting"
+          },
+          "role": {
+            "type": "string",
+            "description": "e.g., Speaker, Acting"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "option"
         ],
         "additionalProperties": false
       }

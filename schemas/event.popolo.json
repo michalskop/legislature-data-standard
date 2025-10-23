@@ -1,0 +1,86 @@
+{
+  "$ref": "#/definitions/PopoloEvent",
+  "definitions": {
+    "PopoloEvent": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "start_date": {
+          "type": "string",
+          "description": "YYYY-MM-DD or ISO datetime"
+        },
+        "end_date": {
+          "type": "string",
+          "description": "YYYY-MM-DD or ISO datetime"
+        },
+        "location": {
+          "type": "string"
+        },
+        "classification": {
+          "type": "string",
+          "description": "e.g., session, sitting, hearing"
+        },
+        "organization_id": {
+          "type": "string"
+        },
+        "parent_id": {
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

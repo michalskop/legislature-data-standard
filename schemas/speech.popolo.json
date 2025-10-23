@@ -1,0 +1,93 @@
+{
+  "$ref": "#/definitions/PopoloSpeech",
+  "definitions": {
+    "PopoloSpeech": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string",
+          "description": "Transcript text"
+        },
+        "audio": {
+          "type": "string",
+          "format": "uri"
+        },
+        "video": {
+          "type": "string",
+          "format": "uri"
+        },
+        "speaker_id": {
+          "type": "string",
+          "description": "Person id of the speaker"
+        },
+        "on_behalf_of_id": {
+          "type": "string",
+          "description": "Organization on whose behalf the speech is made"
+        },
+        "event_id": {
+          "type": "string",
+          "description": "Related Event id"
+        },
+        "date": {
+          "type": "string",
+          "description": "YYYY-MM-DD or ISO datetime"
+        },
+        "language": {
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

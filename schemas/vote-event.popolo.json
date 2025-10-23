@@ -1,0 +1,89 @@
+{
+  "$ref": "#/definitions/PopoloVoteEvent",
+  "definitions": {
+    "PopoloVoteEvent": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "identifier": {
+          "type": "string",
+          "description": "Roll call or journal id"
+        },
+        "motion_id": {
+          "type": "string"
+        },
+        "organization_id": {
+          "type": "string"
+        },
+        "start_date": {
+          "type": "string",
+          "description": "YYYY-MM-DD or ISO datetime"
+        },
+        "end_date": {
+          "type": "string",
+          "description": "YYYY-MM-DD or ISO datetime"
+        },
+        "result": {
+          "type": "string",
+          "description": "e.g., passed, failed"
+        },
+        "counts": {
+          "type": "array",
+          "description": "See Count objects"
+        },
+        "votes": {
+          "type": "array",
+          "description": "See Vote objects"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

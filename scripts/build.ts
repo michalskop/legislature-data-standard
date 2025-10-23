@@ -6,6 +6,16 @@ import { PopoloPersonSchema } from "../schemas/person.popolo.schema";
 import { PopoloOrganizationSchema } from "../schemas/organization.popolo.schema";
 import { PopoloMembershipSchema } from "../schemas/membership.popolo.schema";
 import { PopoloPostSchema } from "../schemas/post.popolo.schema";
+import { PopoloContactDetailSchema } from "../schemas/contact-detail.popolo.schema";
+import { PopoloNameComponentSchema } from "../schemas/name-component.popolo.schema";
+import { PopoloMotionSchema } from "../schemas/motion.popolo.schema";
+import { PopoloVoteEventSchema } from "../schemas/vote-event.popolo.schema";
+import { PopoloCountSchema } from "../schemas/count.popolo.schema";
+import { PopoloVoteSchema } from "../schemas/vote.popolo.schema";
+import { PopoloAreaSchema } from "../schemas/area.popolo.schema";
+import { PopoloEventSchema } from "../schemas/event.popolo.schema";
+import { PopoloSpeechSchema } from "../schemas/speech.popolo.schema";
+
 
 type SchemaItem = { name: string; fileBase: string; zod: any };
 
@@ -13,7 +23,17 @@ const SCHEMAS: SchemaItem[] = [
   { name: "PopoloPerson",       fileBase: "person.popolo",       zod: PopoloPersonSchema },
   { name: "PopoloOrganization", fileBase: "organization.popolo", zod: PopoloOrganizationSchema },
   { name: "PopoloMembership",   fileBase: "membership.popolo",   zod: PopoloMembershipSchema },
-  { name: "PopoloPost",         fileBase: "post.popolo",         zod: PopoloPostSchema }
+  { name: "PopoloPost",         fileBase: "post.popolo",         zod: PopoloPostSchema },
+  { name: "PopoloContactDetail", fileBase: "contact-detail.popolo", zod: PopoloContactDetailSchema },
+  { name: "PopoloNameComponent", fileBase: "name-component.popolo", zod: PopoloNameComponentSchema },
+  { name: "PopoloMotion",        fileBase: "motion.popolo",        zod: PopoloMotionSchema },
+  { name: "PopoloVoteEvent",     fileBase: "vote-event.popolo",    zod: PopoloVoteEventSchema },
+  { name: "PopoloCount",         fileBase: "count.popolo",         zod: PopoloCountSchema },
+  { name: "PopoloVote",          fileBase: "vote.popolo",          zod: PopoloVoteSchema },
+  { name: "PopoloArea",          fileBase: "area.popolo",          zod: PopoloAreaSchema },
+  { name: "PopoloEvent",         fileBase: "event.popolo",         zod: PopoloEventSchema },
+  { name: "PopoloSpeech",        fileBase: "speech.popolo",        zod: PopoloSpeechSchema },
+
 ];
 
 const out = (p: string) => path.join(process.cwd(), p);
