@@ -50,15 +50,44 @@ const destLatest = path.join(destBase, "latest");
 rimraf(destVer);   copyTree("stage", destVer);
 rimraf(destLatest);copyTree("stage", destLatest);
 
+rimraf(path.join("dist", "latest"));
+copyTree("stage", path.join("dist", "latest"));
+
 // write branch-root redirect to latest (if branch)
 if (branch) {
   const redirect = `<!DOCTYPE html><meta charset="utf-8"><title>Redirecting…</title><meta http-equiv="refresh" content="0; url=./latest/"><link rel="canonical" href="./latest/"><script>location.replace('./latest/' + location.hash);</script>`;
   fs.writeFileSync(path.join(destBase, "index.html"), redirect);
 }
 
-// always have a root index -> /latest/
-const rootRedirect = `<!DOCTYPE html><meta charset="utf-8"><title>Redirecting…</title><meta http-equiv="refresh" content="0; url=./latest/"><link rel="canonical" href="./latest/"><script>location.replace('./latest/' + location.hash);</script>`;
-fs.writeFileSync(path.join("dist", "index.html"), rootRedirect);
+// Always write a main index listing all branches & versions
+function generateMainIndex() {
+  const branches = fs.readdirSync("dist")
+    .filter(f => fs.existsSync(path.join("dist", f, "latest", "index.html")))
+    .filter(f => !["latest"].includes(f));
+
+  const list = branches.map(b => 
+    `<li><a href="./${b}/latest/">${b}/latest</a></li>`).join("\n");
+
+  const html = `<!DOCTYPE html>
+  <html lang="en">
+  <meta charset="utf-8">
+  <title>Legislature Data Standard</title>
+  <body style="font-family: sans-serif; max-width: 700px; margin: 3em auto;">
+    <h1>Legislature Data Standard</h1>
+    <p>This repository hosts published JSON schemas and OpenAPI specs for Popolo and Data Times (DT) standards.</p>
+    <ul>
+      ${list}
+      <li><a href="./latest/">latest (currently DT)</a></li>
+    </ul>
+    <p style="margin-top:2em;font-size:90%;color:#555;">
+      Source: <a href="https://github.com/michalskop/legislature-data-standard">github.com/michalskop/legislature-data-standard</a>
+    </p>
+  </body></html>`;
+
+  fs.writeFileSync(path.join("dist", "index.html"), html);
+}
+generateMainIndex();
+
 
 rimraf("stage");
 console.log(`Published branch=${branch} version=${version} to ${destVer} and ${destLatest}`);
