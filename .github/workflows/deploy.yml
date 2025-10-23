@@ -1,3 +1,4 @@
+# .github/workflows/deploy.yml
 name: Deploy data standard to GitHub Pages
 
 on:
@@ -14,13 +15,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
 
       - name: Install deps
         run: npm ci || npm i
@@ -28,35 +25,25 @@ jobs:
       - name: Build JSON Schemas
         run: npm run build:schemas
 
-      # Build & publish POPOLO reference into dist/popolo/{version,latest}
+      # --- Popolo FIRST ---
       - name: Build OpenAPI (Popolo)
-        env:
-          STD_BRANCH: popolo
-          STD_VERSION: popolo
+        env: { STD_BRANCH: popolo, STD_VERSION: popolo }
         run: npm run build:openapi
       - name: Release (Popolo)
-        env:
-          STD_BRANCH: popolo
-          STD_VERSION: popolo
+        env: { STD_BRANCH: popolo, STD_VERSION: popolo }
         run: npm run release
 
-      # Build & publish DT into dist/dt/{version,latest}
+      # --- DT LAST (so it owns /latest) ---
       - name: Build OpenAPI (DT)
-        env:
-          STD_BRANCH: dt
-          STD_VERSION: 0.1.0
+        env: { STD_BRANCH: dt, STD_VERSION: 0.1.0 }
         run: npm run build:openapi
       - name: Release (DT)
-        env:
-          STD_BRANCH: dt
-          STD_VERSION: 0.1.0
+        env: { STD_BRANCH: dt, STD_VERSION: 0.1.0 }
         run: npm run release
 
-      # Upload the combined dist/ (has popolo/, dt/, latest/, and root index.html)
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+        with: { path: dist }
 
       - name: Deploy to GitHub Pages
         id: deployment
