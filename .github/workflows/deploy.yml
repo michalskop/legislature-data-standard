@@ -1,13 +1,9 @@
-name: Build & Deploy (Redoc OSS)
+name: Deploy data standard to GitHub Pages
 
 on:
-  workflow_dispatch:
-    inputs:
-      std_version:
-        description: "Version label (e.g. popolo, v1, v1.1)"
-        required: true
   push:
     branches: [ main ]
+  workflow_dispatch: {}
 
 permissions:
   contents: read
@@ -15,46 +11,53 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - run: npm ci || npm i
+      - name: Install deps
+        run: npm ci || npm i
 
-      - name: Build schemas
+      - name: Build JSON Schemas
         run: npm run build:schemas
 
-      - name: Build OpenAPI spec
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            STD_VERSION=${{ inputs.std_version }} npm run build:openapi
-          else
-            STD_VERSION=latest npm run build:openapi
-          fi
+      # Build & publish POPOLO reference into dist/popolo/{version,latest}
+      - name: Build OpenAPI (Popolo)
+        env:
+          STD_BRANCH: popolo
+          STD_VERSION: popolo
+        run: npm run build:openapi
+      - name: Release (Popolo)
+        env:
+          STD_BRANCH: popolo
+          STD_VERSION: popolo
+        run: npm run release
 
-      - name: Assemble dist
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            STD_VERSION=${{ inputs.std_version }} npm run release
-          else
-            STD_VERSION=latest npm run release
-          fi
+      # Build & publish DT into dist/dt/{version,latest}
+      - name: Build OpenAPI (DT)
+        env:
+          STD_BRANCH: dt
+          STD_VERSION: 0.1.0
+        run: npm run build:openapi
+      - name: Release (DT)
+        env:
+          STD_BRANCH: dt
+          STD_VERSION: 0.1.0
+        run: npm run release
 
-      - uses: actions/upload-pages-artifact@v3
+      # Upload the combined dist/ (has popolo/, dt/, latest/, and root index.html)
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
