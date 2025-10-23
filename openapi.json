@@ -3,20 +3,70 @@
   "info": {
     "title": "Legislature Data Standard",
     "version": "popolo",
-    "description": "Version **popolo** of the standard. Includes a Popolo-compatible Person schema."
+    "description": "Version **popolo**. 4 schema(s)."
   },
   "paths": {
-    "/_schemas/person": {
+    "/_schemas/membership-popolo": {
       "get": {
-        "summary": "Schema: PopoloPerson (example endpoint)",
-        "description": "Dummy endpoint to expose the schema in Redoc.",
+        "summary": "Schema: membership.popolo",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PopoloPerson"
+                  "$ref": "#/components/schemas/membership.popolo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/organization-popolo": {
+      "get": {
+        "summary": "Schema: organization.popolo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/organization.popolo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/person-popolo": {
+      "get": {
+        "summary": "Schema: person.popolo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/person.popolo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/post-popolo": {
+      "get": {
+        "summary": "Schema: post.popolo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/post.popolo"
                 }
               }
             }
@@ -27,7 +77,579 @@
   },
   "components": {
     "schemas": {
-      "PopoloPerson": {
+      "membership.popolo": {
+        "definitions": {
+          "PopoloMembership": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label describing the membership."
+              },
+              "role": {
+                "type": "string",
+                "description": "The role fulfilled (string)."
+              },
+              "member_id": {
+                "type": "string",
+                "description": "If the member is an org, its ID."
+              },
+              "person_id": {
+                "type": "string",
+                "description": "If the member is a person, their ID."
+              },
+              "organization_id": {
+                "type": "string",
+                "description": "Organization in which the person/org is a member."
+              },
+              "post_id": {
+                "type": "string",
+                "description": "Post held by the member (optional)."
+              },
+              "on_behalf_of_id": {
+                "type": "string",
+                "description": "Org on whose behalf the person is a member."
+              },
+              "area_id": {
+                "type": "string",
+                "description": "Related geographic area ID."
+              },
+              "start_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD start."
+              },
+              "end_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD end."
+              },
+              "contact_details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string",
+            "description": "Label describing the membership."
+          },
+          "role": {
+            "type": "string",
+            "description": "The role fulfilled (string)."
+          },
+          "member_id": {
+            "type": "string",
+            "description": "If the member is an org, its ID."
+          },
+          "person_id": {
+            "type": "string",
+            "description": "If the member is a person, their ID."
+          },
+          "organization_id": {
+            "type": "string",
+            "description": "Organization in which the person/org is a member."
+          },
+          "post_id": {
+            "type": "string",
+            "description": "Post held by the member (optional)."
+          },
+          "on_behalf_of_id": {
+            "type": "string",
+            "description": "Org on whose behalf the person is a member."
+          },
+          "area_id": {
+            "type": "string",
+            "description": "Related geographic area ID."
+          },
+          "start_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD start."
+          },
+          "end_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD end."
+          },
+          "contact_details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "organization.popolo": {
+        "definitions": {
+          "PopoloOrganization": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string",
+                "description": "Primary name."
+              },
+              "other_names": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "type": "string"
+                    },
+                    "end_date": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "additionalProperties": false
+                },
+                "description": "Alternate and former names."
+              },
+              "identifiers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "scheme": {
+                      "type": "string"
+                    },
+                    "identifier": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "scheme",
+                    "identifier"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "classification": {
+                "type": "string",
+                "description": "Organizational category, e.g., committee, party."
+              },
+              "parent": {
+                "type": "string",
+                "description": "Human name or object ref (use parent_id for linkage)."
+              },
+              "parent_id": {
+                "type": "string",
+                "description": "ID of the parent org."
+              },
+              "area_id": {
+                "type": "string",
+                "description": "Related geographic area ID."
+              },
+              "summary": {
+                "type": "string",
+                "description": "One-line description."
+              },
+              "description": {
+                "type": "string",
+                "description": "Longer description."
+              },
+              "founding_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD."
+              },
+              "dissolution_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD."
+              },
+              "image": {
+                "type": "string",
+                "format": "uri"
+              },
+              "contact_details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Primary name."
+          },
+          "other_names": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "start_date": {
+                  "type": "string"
+                },
+                "end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Alternate and former names."
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "scheme": {
+                  "type": "string"
+                },
+                "identifier": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "scheme",
+                "identifier"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "classification": {
+            "type": "string",
+            "description": "Organizational category, e.g., committee, party."
+          },
+          "parent": {
+            "type": "string",
+            "description": "Human name or object ref (use parent_id for linkage)."
+          },
+          "parent_id": {
+            "type": "string",
+            "description": "ID of the parent org."
+          },
+          "area_id": {
+            "type": "string",
+            "description": "Related geographic area ID."
+          },
+          "summary": {
+            "type": "string",
+            "description": "One-line description."
+          },
+          "description": {
+            "type": "string",
+            "description": "Longer description."
+          },
+          "founding_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD."
+          },
+          "dissolution_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD."
+          },
+          "image": {
+            "type": "string",
+            "format": "uri"
+          },
+          "contact_details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "person.popolo": {
         "definitions": {
           "PopoloPerson": {
             "type": "object",
@@ -341,6 +963,249 @@
         },
         "required": [
           "name"
+        ],
+        "additionalProperties": false
+      },
+      "post.popolo": {
+        "definitions": {
+          "PopoloPost": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label describing the post."
+              },
+              "other_label": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "description": "Alternate label(s), e.g., abbreviations."
+              },
+              "role": {
+                "type": "string",
+                "description": "Function the holder fulfills."
+              },
+              "organization_id": {
+                "type": "string",
+                "description": "Organization in which the post is held."
+              },
+              "area_id": {
+                "type": "string",
+                "description": "Related geographic area ID."
+              },
+              "start_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD (creation/start)."
+              },
+              "end_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD (elimination/end)."
+              },
+              "contact_details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "label",
+              "organization_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string",
+            "description": "Label describing the post."
+          },
+          "other_label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "description": "Alternate label(s), e.g., abbreviations."
+          },
+          "role": {
+            "type": "string",
+            "description": "Function the holder fulfills."
+          },
+          "organization_id": {
+            "type": "string",
+            "description": "Organization in which the post is held."
+          },
+          "area_id": {
+            "type": "string",
+            "description": "Related geographic area ID."
+          },
+          "start_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD (creation/start)."
+          },
+          "end_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD (elimination/end)."
+          },
+          "contact_details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "label",
+          "organization_id"
         ],
         "additionalProperties": false
       }

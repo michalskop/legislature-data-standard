@@ -1,4 +1,4 @@
-# Schema: PopoloPerson
+# Schema: PopoloMembership
 
 | Field | Type | Required | Description |
 |---|---:|:---:|---|
