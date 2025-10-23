@@ -64,7 +64,17 @@ if (branch) {
   fs.writeFileSync(path.join(destBase, "index.html"), redirect);
 }
 
+// always have a root index -> /latest/
+const rootRedirect = `<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Redirecting…</title>
+<meta http-equiv="refresh" content="0; url=./latest/">
+<link rel="canonical" href="./latest/">
+<script>location.replace('./latest/' + location.hash);</script>`;
+fs.writeFileSync(path.join("dist", "index.html"), rootRedirect);
+
 // cleanup stage
 rimraf("stage");
 
 console.log(`Published to ${destVer} and ${destLatest}${branch ? " (and /latest)" : ""} using ${specFile}`);
+
