@@ -35,13 +35,19 @@ const SCHEMAS: SchemaItem[] = [
   }
 ];
 
+/** Write OpenAPI-friendly JSON Schema: no #/definitions, no $ref chains */
 function writeJsonSchema(item: SchemaItem) {
-  const json = zodToJsonSchema(item.zod, item.name);
+  const json = zodToJsonSchema(item.zod, item.name, {
+    target: "openApi3",
+    $refStrategy: "none"
+  });
   ensureDir(out("schemas"));
   fs.writeFileSync(out(`schemas/${item.fileBase}.json`), JSON.stringify(json, null, 2));
 }
 
+/** Minimal Markdown table + example */
 function writeMarkdown(item: SchemaItem) {
+  // crude field/description extractor for top-level object
   const shape = (item.zod as any)._def.shape();
   const rows = [
     "| Field | Type | Description |",
@@ -49,11 +55,11 @@ function writeMarkdown(item: SchemaItem) {
   ];
   Object.keys(shape).forEach((key) => {
     const z: any = shape[key];
-    const t = (z._def?.typeName || z._def?.innerType?._def?.typeName || "unknown")
+    const tn = (z._def?.typeName || z._def?.innerType?._def?.typeName || "unknown")
       .replace("Zod", "")
       .toLowerCase();
     const desc = z._def?.description || "";
-    rows.push(`|\`${key}\`|${t}|${desc}|`);
+    rows.push(`|\`${key}\`|${tn}|${desc}|`);
   });
 
   const md = `# Schema: ${item.name}
@@ -68,6 +74,7 @@ ${JSON.stringify(item.example ?? {}, null, 2)}
   fs.writeFileSync(out(`schemas/${item.fileBase}.md`), md);
 }
 
+// Run all generators
 for (const s of SCHEMAS) {
   writeJsonSchema(s);
   writeMarkdown(s);
