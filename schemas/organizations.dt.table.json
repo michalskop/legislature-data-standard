@@ -1,0 +1,90 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Primary name.",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "other_names",
+      "type": "array",
+      "description": "Alternate and former names."
+    },
+    {
+      "name": "identifiers",
+      "type": "array"
+    },
+    {
+      "name": "classification",
+      "type": "string",
+      "description": "Organizational category, e.g., committee, party."
+    },
+    {
+      "name": "parent",
+      "type": "string",
+      "description": "Human name or object ref (use parent_id for linkage)."
+    },
+    {
+      "name": "parent_id",
+      "type": "string",
+      "description": "ID of the parent org."
+    },
+    {
+      "name": "area_id",
+      "type": "string",
+      "description": "Related geographic area ID."
+    },
+    {
+      "name": "summary",
+      "type": "string",
+      "description": "One-line description."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "Longer description."
+    },
+    {
+      "name": "founding_date",
+      "type": "string",
+      "description": "YYYY-MM-DD."
+    },
+    {
+      "name": "dissolution_date",
+      "type": "string",
+      "description": "YYYY-MM-DD."
+    },
+    {
+      "name": "image",
+      "type": "string",
+      "format": "uri"
+    },
+    {
+      "name": "contact_details",
+      "type": "array"
+    },
+    {
+      "name": "links",
+      "type": "array"
+    },
+    {
+      "name": "sources",
+      "type": "array"
+    },
+    {
+      "name": "created_at",
+      "type": "string"
+    },
+    {
+      "name": "updated_at",
+      "type": "string"
+    }
+  ]
+}

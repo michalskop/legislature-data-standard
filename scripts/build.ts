@@ -17,6 +17,10 @@ import { PopoloEventSchema } from "../schemas/event.popolo.schema";
 import { PopoloSpeechSchema } from "../schemas/speech.popolo.schema";
 import { DtPersonSchema } from "../schemas/person.dt.schema";
 import { DtPersonsSchema } from "../schemas/persons.dt.schema";
+import { DtOrganizationSchema } from "../schemas/organization.dt.schema";
+import { DtOrganizationsSchema } from "../schemas/organizations.dt.schema";
+import { DtMembershipSchema } from "../schemas/membership.dt.schema";
+import { DtMembershipsSchema } from "../schemas/memberships.dt.schema";
 
 
 type SchemaItem = { name: string; fileBase: string; zod: any };
@@ -37,6 +41,10 @@ const SCHEMAS: SchemaItem[] = [
   { name: "PopoloSpeech",        fileBase: "speech.popolo",        zod: PopoloSpeechSchema },
   { name: "DtPerson",            fileBase: "person.dt",            zod: DtPersonSchema },
   { name: "DtPersons",           fileBase: "persons.dt",           zod: DtPersonsSchema },
+  { name: "DtOrganization",      fileBase: "organization.dt",      zod: DtOrganizationSchema },
+  { name: "DtOrganizations",     fileBase: "organizations.dt",     zod: DtOrganizationsSchema },
+  { name: "DtMembership",        fileBase: "membership.dt",        zod: DtMembershipSchema },
+  { name: "DtMemberships",       fileBase: "memberships.dt",       zod: DtMembershipsSchema },
 ];
 
 const out = (p: string) => path.join(process.cwd(), p);

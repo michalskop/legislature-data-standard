@@ -68,10 +68,19 @@ def generate_table_schema(json_schema_path):
 
     # Handle array-based schemas (e.g., persons.dt.json)
     if schema_def.get('type') == 'array':
-        object_schema = schema_def['items']
+        base_object_schema = schema_def['items']
     # Handle object-based schemas (e.g., person.dt.json)
     else:
-        object_schema = schema_def
+        base_object_schema = schema_def
+
+    # Handle schemas with 'allOf' by merging properties
+    if 'allOf' in base_object_schema:
+        object_schema = {'type': 'object', 'properties': {}, 'required': []}
+        for sub_schema in base_object_schema['allOf']:
+            object_schema['properties'].update(sub_schema.get('properties', {}))
+            object_schema['required'].extend(sub_schema.get('required', []))
+    else:
+        object_schema = base_object_schema
 
     if object_schema.get('type') != 'object' or 'properties' not in object_schema:
         # Not a schema we can convert to a table
