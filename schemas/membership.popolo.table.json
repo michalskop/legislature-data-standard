@@ -1,0 +1,78 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "description": "Label describing the membership."
+    },
+    {
+      "name": "role",
+      "type": "string",
+      "description": "The role fulfilled (string)."
+    },
+    {
+      "name": "member_id",
+      "type": "string",
+      "description": "If the member is an org, its ID."
+    },
+    {
+      "name": "person_id",
+      "type": "string",
+      "description": "If the member is a person, their ID."
+    },
+    {
+      "name": "organization_id",
+      "type": "string",
+      "description": "Organization in which the person/org is a member."
+    },
+    {
+      "name": "post_id",
+      "type": "string",
+      "description": "Post held by the member (optional)."
+    },
+    {
+      "name": "on_behalf_of_id",
+      "type": "string",
+      "description": "Org on whose behalf the person is a member."
+    },
+    {
+      "name": "area_id",
+      "type": "string",
+      "description": "Related geographic area ID."
+    },
+    {
+      "name": "start_date",
+      "type": "string",
+      "description": "YYYY-MM-DD start."
+    },
+    {
+      "name": "end_date",
+      "type": "string",
+      "description": "YYYY-MM-DD end."
+    },
+    {
+      "name": "contact_details",
+      "type": "array"
+    },
+    {
+      "name": "links",
+      "type": "array"
+    },
+    {
+      "name": "sources",
+      "type": "array"
+    },
+    {
+      "name": "created_at",
+      "type": "string"
+    },
+    {
+      "name": "updated_at",
+      "type": "string"
+    }
+  ]
+}

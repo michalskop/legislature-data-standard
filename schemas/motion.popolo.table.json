@@ -1,0 +1,59 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "identifier",
+      "type": "string",
+      "description": "Legislative identifier"
+    },
+    {
+      "name": "organization_id",
+      "type": "string",
+      "description": "Sponsoring or deciding organization"
+    },
+    {
+      "name": "date",
+      "type": "string",
+      "description": "YYYY-MM-DD"
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "description": "Motion text"
+    },
+    {
+      "name": "classification",
+      "type": "string",
+      "description": "e.g., passage, amendment, appointment"
+    },
+    {
+      "name": "result",
+      "type": "string",
+      "description": "e.g., passed, failed"
+    },
+    {
+      "name": "requirement",
+      "type": "string",
+      "description": "e.g., simple majority"
+    },
+    {
+      "name": "links",
+      "type": "array"
+    },
+    {
+      "name": "sources",
+      "type": "array"
+    },
+    {
+      "name": "created_at",
+      "type": "string"
+    },
+    {
+      "name": "updated_at",
+      "type": "string"
+    }
+  ]
+}

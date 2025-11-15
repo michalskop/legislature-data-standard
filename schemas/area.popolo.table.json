@@ -1,0 +1,58 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "other_names",
+      "type": "array"
+    },
+    {
+      "name": "identifiers",
+      "type": "array"
+    },
+    {
+      "name": "classification",
+      "type": "string",
+      "description": "e.g., constituency, district, region"
+    },
+    {
+      "name": "parent_id",
+      "type": "string"
+    },
+    {
+      "name": "geometry",
+      "type": "string",
+      "description": "GeoJSON object"
+    },
+    {
+      "name": "bbox",
+      "type": "array",
+      "description": "[west, south, east, north]"
+    },
+    {
+      "name": "links",
+      "type": "array"
+    },
+    {
+      "name": "sources",
+      "type": "array"
+    },
+    {
+      "name": "created_at",
+      "type": "string"
+    },
+    {
+      "name": "updated_at",
+      "type": "string"
+    }
+  ]
+}

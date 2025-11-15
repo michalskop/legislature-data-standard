@@ -1,0 +1,58 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "start_date",
+      "type": "string",
+      "description": "YYYY-MM-DD or ISO datetime"
+    },
+    {
+      "name": "end_date",
+      "type": "string",
+      "description": "YYYY-MM-DD or ISO datetime"
+    },
+    {
+      "name": "location",
+      "type": "string"
+    },
+    {
+      "name": "classification",
+      "type": "string",
+      "description": "e.g., session, sitting, hearing"
+    },
+    {
+      "name": "organization_id",
+      "type": "string"
+    },
+    {
+      "name": "parent_id",
+      "type": "string"
+    },
+    {
+      "name": "links",
+      "type": "array"
+    },
+    {
+      "name": "sources",
+      "type": "array"
+    },
+    {
+      "name": "created_at",
+      "type": "string"
+    },
+    {
+      "name": "updated_at",
+      "type": "string"
+    }
+  ]
+}

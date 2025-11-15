@@ -1,0 +1,82 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Canonical display name.",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "other_names",
+      "type": "array"
+    },
+    {
+      "name": "identifiers",
+      "type": "array"
+    },
+    {
+      "name": "email",
+      "type": "string",
+      "format": "email"
+    },
+    {
+      "name": "gender",
+      "type": "string"
+    },
+    {
+      "name": "pronouns",
+      "type": "string"
+    },
+    {
+      "name": "birth_date",
+      "type": "string"
+    },
+    {
+      "name": "death_date",
+      "type": "string"
+    },
+    {
+      "name": "image",
+      "type": "string",
+      "format": "uri"
+    },
+    {
+      "name": "summary",
+      "type": "string"
+    },
+    {
+      "name": "biography",
+      "type": "string"
+    },
+    {
+      "name": "national_identity",
+      "type": "string"
+    },
+    {
+      "name": "contact_details",
+      "type": "array"
+    },
+    {
+      "name": "links",
+      "type": "array"
+    },
+    {
+      "name": "sources",
+      "type": "array"
+    },
+    {
+      "name": "created_at",
+      "type": "string"
+    },
+    {
+      "name": "updated_at",
+      "type": "string"
+    }
+  ]
+}

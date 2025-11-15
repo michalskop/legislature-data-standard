@@ -1,0 +1,47 @@
+{
+  "fields": [
+    {
+      "name": "family_name",
+      "type": "string"
+    },
+    {
+      "name": "given_name",
+      "type": "string"
+    },
+    {
+      "name": "additional_name",
+      "type": "string"
+    },
+    {
+      "name": "honorific_prefix",
+      "type": "string"
+    },
+    {
+      "name": "honorific_suffix",
+      "type": "string"
+    },
+    {
+      "name": "patronymic_name",
+      "type": "string"
+    },
+    {
+      "name": "sort_name",
+      "type": "string",
+      "description": "Sort-as name (family, given)"
+    },
+    {
+      "name": "note",
+      "type": "string"
+    },
+    {
+      "name": "start_date",
+      "type": "string",
+      "description": "YYYY-MM-DD"
+    },
+    {
+      "name": "end_date",
+      "type": "string",
+      "description": "YYYY-MM-DD"
+    }
+  ]
+}

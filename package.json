@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:schemas": "tsx scripts/build.ts",
+    "build:frictionless": "python3 scripts/generate-frictionless.py",
     "build:openapi": "node scripts/write-openapi.js",
     "release": "node scripts/release.js",
     "build": "npm run build:schemas && npm run build:openapi"

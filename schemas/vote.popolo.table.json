@@ -1,0 +1,30 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "voter_id",
+      "type": "string",
+      "description": "Person id (or org id when applicable)"
+    },
+    {
+      "name": "option",
+      "type": "string",
+      "description": "e.g., yes, no, abstain, absent, not voting",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "role",
+      "type": "string",
+      "description": "e.g., Speaker, Acting"
+    },
+    {
+      "name": "note",
+      "type": "string"
+    }
+  ]
+}

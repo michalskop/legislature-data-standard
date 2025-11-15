@@ -1,0 +1,62 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "identifier",
+      "type": "string",
+      "description": "Roll call or journal id"
+    },
+    {
+      "name": "motion_id",
+      "type": "string"
+    },
+    {
+      "name": "organization_id",
+      "type": "string"
+    },
+    {
+      "name": "start_date",
+      "type": "string",
+      "description": "YYYY-MM-DD or ISO datetime"
+    },
+    {
+      "name": "end_date",
+      "type": "string",
+      "description": "YYYY-MM-DD or ISO datetime"
+    },
+    {
+      "name": "result",
+      "type": "string",
+      "description": "e.g., passed, failed"
+    },
+    {
+      "name": "counts",
+      "type": "array",
+      "description": "See Count objects"
+    },
+    {
+      "name": "votes",
+      "type": "array",
+      "description": "See Vote objects"
+    },
+    {
+      "name": "sources",
+      "type": "array"
+    },
+    {
+      "name": "links",
+      "type": "array"
+    },
+    {
+      "name": "created_at",
+      "type": "string"
+    },
+    {
+      "name": "updated_at",
+      "type": "string"
+    }
+  ]
+}

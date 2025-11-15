@@ -1,0 +1,66 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "description": "Transcript text",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "audio",
+      "type": "string",
+      "format": "uri"
+    },
+    {
+      "name": "video",
+      "type": "string",
+      "format": "uri"
+    },
+    {
+      "name": "speaker_id",
+      "type": "string",
+      "description": "Person id of the speaker"
+    },
+    {
+      "name": "on_behalf_of_id",
+      "type": "string",
+      "description": "Organization on whose behalf the speech is made"
+    },
+    {
+      "name": "event_id",
+      "type": "string",
+      "description": "Related Event id"
+    },
+    {
+      "name": "date",
+      "type": "string",
+      "description": "YYYY-MM-DD or ISO datetime"
+    },
+    {
+      "name": "language",
+      "type": "string"
+    },
+    {
+      "name": "links",
+      "type": "array"
+    },
+    {
+      "name": "sources",
+      "type": "array"
+    },
+    {
+      "name": "created_at",
+      "type": "string"
+    },
+    {
+      "name": "updated_at",
+      "type": "string"
+    }
+  ]
+}

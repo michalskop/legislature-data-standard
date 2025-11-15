@@ -1,0 +1,39 @@
+{
+  "fields": [
+    {
+      "name": "type",
+      "type": "string",
+      "description": "e.g., email, phone, address, fax, web",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "description": "The contact value, e.g., address text, email address",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "description": "e.g., Constituency office"
+    },
+    {
+      "name": "note",
+      "type": "string"
+    },
+    {
+      "name": "valid_from",
+      "type": "string",
+      "description": "YYYY-MM-DD"
+    },
+    {
+      "name": "valid_until",
+      "type": "string",
+      "description": "YYYY-MM-DD"
+    }
+  ]
+}

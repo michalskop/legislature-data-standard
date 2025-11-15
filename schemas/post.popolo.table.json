@@ -1,0 +1,69 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "description": "Label describing the post.",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "other_label",
+      "type": "string",
+      "description": "Alternate label(s), e.g., abbreviations."
+    },
+    {
+      "name": "role",
+      "type": "string",
+      "description": "Function the holder fulfills."
+    },
+    {
+      "name": "organization_id",
+      "type": "string",
+      "description": "Organization in which the post is held.",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "area_id",
+      "type": "string",
+      "description": "Related geographic area ID."
+    },
+    {
+      "name": "start_date",
+      "type": "string",
+      "description": "YYYY-MM-DD (creation/start)."
+    },
+    {
+      "name": "end_date",
+      "type": "string",
+      "description": "YYYY-MM-DD (elimination/end)."
+    },
+    {
+      "name": "contact_details",
+      "type": "array"
+    },
+    {
+      "name": "links",
+      "type": "array"
+    },
+    {
+      "name": "sources",
+      "type": "array"
+    },
+    {
+      "name": "created_at",
+      "type": "string"
+    },
+    {
+      "name": "updated_at",
+      "type": "string"
+    }
+  ]
+}

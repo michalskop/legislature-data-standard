@@ -1,0 +1,19 @@
+{
+  "fields": [
+    {
+      "name": "option",
+      "type": "string",
+      "description": "e.g., yes, no, abstain, absent, not voting",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "value",
+      "type": "integer",
+      "constraints": {
+        "required": true
+      }
+    }
+  ]
+}
