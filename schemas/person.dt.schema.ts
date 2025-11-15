@@ -1,6 +1,14 @@
 import { z } from "zod";
 import { PopoloPersonSchema } from "./person.popolo.schema";
 
+/** A simplified membership object for denormalization */
+const DtMembershipSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  start_date: z.string().datetime({ message: "Must be a valid ISO 8601 date or date-time" }).optional().nullable(),
+  end_date: z.string().datetime({ message: "Must be a valid ISO 8601 date or date-time" }).optional().nullable(),
+});
+
 /** Helper: split "A, B , C" -> ["A","B","C"] and trim; pass-through arrays */
 const toStringArray = (v: unknown) => {
   if (Array.isArray(v)) return v.map(String).map(s => s.trim()).filter(Boolean);
@@ -20,6 +28,14 @@ export const DtPersonSchema = PopoloPersonSchema.extend({
   // Convenience inputs we normalize from
   given_name: z.string().optional().describe("Single given name; normalized into given_names."),
   family_name: z.string().optional().describe("Single family name; normalized into family_names."),
+
+  // Denormalized memberships for easier access
+  memberships: z.object({
+    parliament: z.array(DtMembershipSchema).optional().describe("Membership in a parliamentary term."),
+    groups: z.array(DtMembershipSchema).optional().describe("Membership in parliamentary groups."),
+    candidate_list: z.array(DtMembershipSchema).optional().describe("Membership on a candidate list."),
+    constituency: z.array(DtMembershipSchema).optional().describe("Representation of a constituency."),
+  }).optional(),
 })
   // Normalize singular and comma-separated to arrays
   .transform((v) => {

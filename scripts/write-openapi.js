@@ -24,7 +24,9 @@ function toKebab(s){ return s.replace(/([a-z])([A-Z])/g,"$1-$2").replace(/\./g,"
 
 (async () => {
   const version = process.env.STD_VERSION || "latest";
-  const filesAll = fs.readdirSync("schemas").filter(f => f.endsWith(".json")).sort();
+  const filesAll = fs.readdirSync("schemas")
+    .filter(f => f.endsWith(".json") && !f.endsWith(".table.json"))
+    .sort();
   const files = pickFiles(filesAll);
 
   const components = {};

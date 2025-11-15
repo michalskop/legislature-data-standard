@@ -1862,6 +1862,236 @@
               "family_name": {
                 "type": "string",
                 "description": "Single family name; normalized into family_names."
+              },
+              "memberships": {
+                "type": "object",
+                "properties": {
+                  "parliament": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "start_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "end_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "description": "Membership in a parliamentary term."
+                  },
+                  "groups": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "start_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "end_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "description": "Membership in parliamentary groups."
+                  },
+                  "candidate_list": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "start_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "end_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "description": "Membership on a candidate list."
+                  },
+                  "constituency": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "start_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "end_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "description": "Representation of a constituency."
+                  }
+                },
+                "additionalProperties": false
               }
             },
             "required": [
@@ -2133,6 +2363,236 @@
           "family_name": {
             "type": "string",
             "description": "Single family name; normalized into family_names."
+          },
+          "memberships": {
+            "type": "object",
+            "properties": {
+              "parliament": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "end_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "additionalProperties": false
+                },
+                "description": "Membership in a parliamentary term."
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "end_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "additionalProperties": false
+                },
+                "description": "Membership in parliamentary groups."
+              },
+              "candidate_list": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "end_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "additionalProperties": false
+                },
+                "description": "Membership on a candidate list."
+              },
+              "constituency": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "end_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "additionalProperties": false
+                },
+                "description": "Representation of a constituency."
+              }
+            },
+            "additionalProperties": false
           }
         },
         "required": [
@@ -2904,6 +3364,236 @@
                 "family_name": {
                   "type": "string",
                   "description": "Single family name; normalized into family_names."
+                },
+                "memberships": {
+                  "type": "object",
+                  "properties": {
+                    "parliament": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "start_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "end_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "description": "Membership in a parliamentary term."
+                    },
+                    "groups": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "start_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "end_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "description": "Membership in parliamentary groups."
+                    },
+                    "candidate_list": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "start_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "end_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "description": "Membership on a candidate list."
+                    },
+                    "constituency": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "start_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "end_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "description": "Representation of a constituency."
+                    }
+                  },
+                  "additionalProperties": false
                 }
               },
               "required": [
@@ -3178,6 +3868,236 @@
             "family_name": {
               "type": "string",
               "description": "Single family name; normalized into family_names."
+            },
+            "memberships": {
+              "type": "object",
+              "properties": {
+                "parliament": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "end_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Membership in a parliamentary term."
+                },
+                "groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "end_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Membership in parliamentary groups."
+                },
+                "candidate_list": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "end_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Membership on a candidate list."
+                },
+                "constituency": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "end_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Representation of a constituency."
+                }
+              },
+              "additionalProperties": false
             }
           },
           "required": [

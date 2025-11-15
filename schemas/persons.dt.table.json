@@ -100,6 +100,10 @@
       "name": "family_name",
       "type": "string",
       "description": "Single family name; normalized into family_names."
+    },
+    {
+      "name": "memberships",
+      "type": "object"
     }
   ]
 }
