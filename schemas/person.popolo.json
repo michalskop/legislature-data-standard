@@ -23,10 +23,40 @@
                 "type": "string"
               },
               "start_date": {
-                "type": "string"
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               },
               "end_date": {
-                "type": "string"
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               }
             },
             "required": [
@@ -65,10 +95,40 @@
           "type": "string"
         },
         "birth_date": {
-          "type": "string"
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "death_date": {
-          "type": "string"
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "image": {
           "type": "string",
@@ -147,10 +207,40 @@
           }
         },
         "created_at": {
-          "type": "string"
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "updated_at": {
-          "type": "string"
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [

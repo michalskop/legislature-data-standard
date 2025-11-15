@@ -15,6 +15,8 @@ import { PopoloVoteSchema } from "../schemas/vote.popolo.schema";
 import { PopoloAreaSchema } from "../schemas/area.popolo.schema";
 import { PopoloEventSchema } from "../schemas/event.popolo.schema";
 import { PopoloSpeechSchema } from "../schemas/speech.popolo.schema";
+import { DtPersonSchema } from "../schemas/person.dt.schema";
+import { DtPersonsSchema } from "../schemas/persons.dt.schema";
 
 
 type SchemaItem = { name: string; fileBase: string; zod: any };
@@ -33,7 +35,8 @@ const SCHEMAS: SchemaItem[] = [
   { name: "PopoloArea",          fileBase: "area.popolo",          zod: PopoloAreaSchema },
   { name: "PopoloEvent",         fileBase: "event.popolo",         zod: PopoloEventSchema },
   { name: "PopoloSpeech",        fileBase: "speech.popolo",        zod: PopoloSpeechSchema },
-
+  { name: "DtPerson",            fileBase: "person.dt",            zod: DtPersonSchema },
+  { name: "DtPersons",           fileBase: "persons.dt",           zod: DtPersonsSchema },
 ];
 
 const out = (p: string) => path.join(process.cwd(), p);
@@ -43,10 +46,7 @@ function writeJsonSchema(item: SchemaItem) {
   if (!item?.zod || !item?.zod._def) {
     throw new Error(`Schema "${item?.name}" is undefined or not a Zod schema.`);
   }
-  const json = zodToJsonSchema(item.zod, item.name, {
-    target: "openApi3",
-    $refStrategy: "none",
-  });
+  const json = zodToJsonSchema(item.zod, { name: item.name });
   ensureDir(out("schemas"));
   fs.writeFileSync(out(`schemas/${item.fileBase}.json`), JSON.stringify(json, null, 2));
   console.log(`✓ JSON  ${item.fileBase}.json`);

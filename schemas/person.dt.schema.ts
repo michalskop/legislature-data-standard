@@ -10,10 +10,11 @@ const toStringArray = (v: unknown) => {
 
 /** DT Person: Popolo-compatible superset focused on name handling */
 export const DtPersonSchema = PopoloPersonSchema.extend({
+  id: z.string(),
   // Canonical (preferred) fields
-  given_names: z.array(z.string()).min(1).optional()
+  given_names: z.array(z.string()).optional()
     .describe("Ordered given/first names."),
-  family_names: z.array(z.string()).min(1).optional()
+  family_names: z.array(z.string()).optional()
     .describe("Ordered family/surnames (supports multiple)."),
 
   // Convenience inputs we normalize from

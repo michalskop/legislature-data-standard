@@ -1,0 +1,279 @@
+{
+  "$ref": "#/definitions/DtPersons",
+  "definitions": {
+    "DtPersons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Canonical display name."
+          },
+          "other_names": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "start_date": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "end_date": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "scheme": {
+                  "type": "string"
+                },
+                "identifier": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "scheme",
+                "identifier"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "pronouns": {
+            "type": "string"
+          },
+          "birth_date": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "death_date": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "image": {
+            "type": "string",
+            "format": "uri"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "biography": {
+            "type": "string"
+          },
+          "national_identity": {
+            "type": "string"
+          },
+          "contact_details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "given_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Ordered given/first names."
+          },
+          "family_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Ordered family/surnames (supports multiple)."
+          },
+          "given_name": {
+            "type": "string",
+            "description": "Single given name; normalized into given_names."
+          },
+          "family_name": {
+            "type": "string",
+            "description": "Single family name; normalized into family_names."
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

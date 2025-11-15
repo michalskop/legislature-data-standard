@@ -2,8 +2,8 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Legislature Data Standard",
-    "version": "popolo",
-    "description": "Version **popolo**. 13 schema(s)."
+    "version": "0.1.0",
+    "description": "Branch **dt.analyses/votes**, version **0.1.0**. Includes 15 schema(s)."
   },
   "paths": {
     "/_schemas/area-popolo": {
@@ -142,6 +142,23 @@
         }
       }
     },
+    "/_schemas/person-dt": {
+      "get": {
+        "summary": "Schema: person.dt",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/person.dt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/_schemas/person-popolo": {
       "get": {
         "summary": "Schema: person.popolo",
@@ -152,6 +169,23 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/person.popolo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/persons-dt": {
+      "get": {
+        "summary": "Schema: persons.dt",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/persons.dt"
                 }
               }
             }
@@ -1564,9 +1598,9 @@
         ],
         "additionalProperties": false
       },
-      "person.popolo": {
+      "person.dt": {
         "definitions": {
-          "PopoloPerson": {
+          "DtPerson": {
             "type": "object",
             "properties": {
               "id": {
@@ -1588,10 +1622,40 @@
                       "type": "string"
                     },
                     "start_date": {
-                      "type": "string"
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
                     },
                     "end_date": {
-                      "type": "string"
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
                     }
                   },
                   "required": [
@@ -1630,10 +1694,40 @@
                 "type": "string"
               },
               "birth_date": {
-                "type": "string"
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               },
               "death_date": {
-                "type": "string"
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               },
               "image": {
                 "type": "string",
@@ -1712,13 +1806,66 @@
                 }
               },
               "created_at": {
-                "type": "string"
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               },
               "updated_at": {
-                "type": "string"
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "given_names": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Ordered given/first names."
+              },
+              "family_names": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Ordered family/surnames (supports multiple)."
+              },
+              "given_name": {
+                "type": "string",
+                "description": "Single given name; normalized into given_names."
+              },
+              "family_name": {
+                "type": "string",
+                "description": "Single family name; normalized into family_names."
               }
             },
             "required": [
+              "id",
               "name"
             ],
             "additionalProperties": false
@@ -1746,10 +1893,40 @@
                   "type": "string"
                 },
                 "start_date": {
-                  "type": "string"
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
                 },
                 "end_date": {
-                  "type": "string"
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
                 }
               },
               "required": [
@@ -1788,10 +1965,40 @@
             "type": "string"
           },
           "birth_date": {
-            "type": "string"
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "death_date": {
-            "type": "string"
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "image": {
             "type": "string",
@@ -1870,16 +2077,1115 @@
             }
           },
           "created_at": {
-            "type": "string"
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "updated_at": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "given_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Ordered given/first names."
+          },
+          "family_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Ordered family/surnames (supports multiple)."
+          },
+          "given_name": {
+            "type": "string",
+            "description": "Single given name; normalized into given_names."
+          },
+          "family_name": {
+            "type": "string",
+            "description": "Single family name; normalized into family_names."
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "person.popolo": {
+        "definitions": {
+          "PopoloPerson": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string",
+                "description": "Canonical display name."
+              },
+              "other_names": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "end_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "identifiers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "scheme": {
+                      "type": "string"
+                    },
+                    "identifier": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "scheme",
+                    "identifier"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "gender": {
+                "type": "string"
+              },
+              "pronouns": {
+                "type": "string"
+              },
+              "birth_date": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "death_date": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "image": {
+                "type": "string",
+                "format": "uri"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "biography": {
+                "type": "string"
+              },
+              "national_identity": {
+                "type": "string"
+              },
+              "contact_details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "created_at": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "updated_at": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
             "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Canonical display name."
+          },
+          "other_names": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "start_date": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "end_date": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "scheme": {
+                  "type": "string"
+                },
+                "identifier": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "scheme",
+                "identifier"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "pronouns": {
+            "type": "string"
+          },
+          "birth_date": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "death_date": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "image": {
+            "type": "string",
+            "format": "uri"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "biography": {
+            "type": "string"
+          },
+          "national_identity": {
+            "type": "string"
+          },
+          "contact_details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "required": [
           "name"
         ],
         "additionalProperties": false
+      },
+      "persons.dt": {
+        "definitions": {
+          "DtPersons": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Canonical display name."
+                },
+                "other_names": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "note": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "end_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "identifiers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "scheme": {
+                        "type": "string"
+                      },
+                      "identifier": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "scheme",
+                      "identifier"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                },
+                "gender": {
+                  "type": "string"
+                },
+                "pronouns": {
+                  "type": "string"
+                },
+                "birth_date": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "death_date": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "image": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "biography": {
+                  "type": "string"
+                },
+                "national_identity": {
+                  "type": "string"
+                },
+                "contact_details": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "note": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "note": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "sources": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "note": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "created_at": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "updated_at": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "given_names": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Ordered given/first names."
+                },
+                "family_names": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Ordered family/surnames (supports multiple)."
+                },
+                "given_name": {
+                  "type": "string",
+                  "description": "Single given name; normalized into given_names."
+                },
+                "family_name": {
+                  "type": "string",
+                  "description": "Single family name; normalized into family_names."
+                }
+              },
+              "required": [
+                "id",
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string",
+              "description": "Canonical display name."
+            },
+            "other_names": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "note": {
+                    "type": "string"
+                  },
+                  "start_date": {
+                    "anyOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "not": {}
+                          },
+                          {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "end_date": {
+                    "anyOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "not": {}
+                          },
+                          {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "identifiers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "scheme": {
+                    "type": "string"
+                  },
+                  "identifier": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "scheme",
+                  "identifier"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "pronouns": {
+              "type": "string"
+            },
+            "birth_date": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "not": {}
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "death_date": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "not": {}
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "image": {
+              "type": "string",
+              "format": "uri"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "biography": {
+              "type": "string"
+            },
+            "national_identity": {
+              "type": "string"
+            },
+            "contact_details": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "value"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "links": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "url"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "url"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "created_at": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "not": {}
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "updated_at": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "not": {}
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "given_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Ordered given/first names."
+            },
+            "family_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Ordered family/surnames (supports multiple)."
+            },
+            "given_name": {
+              "type": "string",
+              "description": "Single given name; normalized into given_names."
+            },
+            "family_name": {
+              "type": "string",
+              "description": "Single family name; normalized into family_names."
+            }
+          },
+          "required": [
+            "id",
+            "name"
+          ],
+          "additionalProperties": false
+        }
       },
       "post.popolo": {
         "definitions": {

@@ -21,8 +21,8 @@ const ContactDetail = z.object({
 const OtherName = z.object({
   name: z.string(),
   note: z.string().optional(),
-  start_date: z.string().optional(), // YYYY-MM-DD
-  end_date: z.string().optional()
+  start_date: z.string().datetime({ message: "Must be a valid ISO 8601 date or date-time" }).optional().nullable(),
+  end_date: z.string().datetime({ message: "Must be a valid ISO 8601 date or date-time" }).optional().nullable()
 });
 
 export const PopoloPersonSchema = z.object({
@@ -33,8 +33,8 @@ export const PopoloPersonSchema = z.object({
   email: z.string().email().optional(),
   gender: z.string().optional(),
   pronouns: z.string().optional(),
-  birth_date: z.string().optional(),   // YYYY-MM-DD
-  death_date: z.string().optional(),
+  birth_date: z.string().datetime({ message: "Must be a valid ISO 8601 date or date-time" }).optional().nullable(),
+  death_date: z.string().datetime({ message: "Must be a valid ISO 8601 date or date-time" }).optional().nullable(),
   image: z.string().url().optional(),
   summary: z.string().optional(),
   biography: z.string().optional(),
@@ -42,8 +42,8 @@ export const PopoloPersonSchema = z.object({
   contact_details: z.array(ContactDetail).optional(),
   links: z.array(Link).optional(),
   sources: z.array(Source).optional(),
-  created_at: z.string().optional(),   // ISO-8601 datetime
-  updated_at: z.string().optional()
+  created_at: z.string().datetime({ message: "Must be a valid ISO 8601 date or date-time" }).optional().nullable(),
+  updated_at: z.string().datetime({ message: "Must be a valid ISO 8601 date or date-time" }).optional().nullable()
 });
 
 export type PopoloPerson = z.infer<typeof PopoloPersonSchema>;
