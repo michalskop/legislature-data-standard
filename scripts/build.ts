@@ -23,6 +23,12 @@ import { DtOrganizationSchema } from "../schemas/organization.dt.schema";
 import { DtOrganizationsSchema } from "../schemas/organizations.dt.schema";
 import { DtMembershipSchema } from "../schemas/membership.dt.schema";
 import { DtMembershipsSchema } from "../schemas/memberships.dt.schema";
+import { DtMotionSchema } from "../schemas/motion.dt.schema";
+import { DtMotionsSchema } from "../schemas/motions.dt.schema";
+import { DtVoteEventSchema } from "../schemas/vote-event.dt.schema";
+import { DtVoteEventsSchema } from "../schemas/vote-events.dt.schema";
+import { DtCountSchema } from "../schemas/count.dt.schema";
+import { DtVoteSchema } from "../schemas/vote.dt.schema";
 import { DtAnalysesCurrentMembersSchema } from "../schemas/current-members.dt.analyses.schema";
 import { DtAnalysesCurrentTermSchema } from "../schemas/current-term.dt.analyses.schema";
 import { DtAnalysesAllMembersSchema } from "../schemas/all-members.dt.analyses.schema";
@@ -59,6 +65,12 @@ const SCHEMAS: SchemaItem[] = [
   { name: "DtOrganizations",     fileBase: "organizations.dt",     zod: DtOrganizationsSchema },
   { name: "DtMembership",        fileBase: "membership.dt",        zod: DtMembershipSchema },
   { name: "DtMemberships",       fileBase: "memberships.dt",       zod: DtMembershipsSchema },
+  { name: "DtMotion",            fileBase: "motion.dt",            zod: DtMotionSchema },
+  { name: "DtMotions",           fileBase: "motions.dt",           zod: DtMotionsSchema },
+  { name: "DtVoteEvent",         fileBase: "vote-event.dt",        zod: DtVoteEventSchema },
+  { name: "DtVoteEvents",        fileBase: "vote-events.dt",       zod: DtVoteEventsSchema },
+  { name: "DtCount",             fileBase: "count.dt",             zod: DtCountSchema },
+  { name: "DtVote",              fileBase: "vote.dt",              zod: DtVoteSchema },
   { name: "DtTablePersonsRow",   fileBase: "persons-table.dt",     zod: DtPersonsTableRowSchema },
   { name: "DtAnalysesCurrentMembers", fileBase: "current-members.dt.analyses", zod: DtAnalysesCurrentMembersSchema },
   { name: "DtAnalysesTableCurrentMembersRow", fileBase: "current-members-table.dt.analyses", zod: DtAnalysesCurrentMembersTableRowSchema },
