@@ -98,10 +98,15 @@ function generateMainIndex() {
 
   const branches = listBranchesRecursive("dist")
     .filter(b => b !== "latest")
-    .sort();
+    .map((b) => (b.startsWith("dt.analyses/") ? "dt.analyses" : b));
 
-  const list = branches
-    .map(b => `<li><a href="./${b}/latest/">${b}/latest</a></li>`)
+  const uniqueBranches = Array.from(new Set(branches)).sort();
+
+  const list = uniqueBranches
+    .map((b) => {
+      if (b === "dt.analyses") return `<li><a href="./dt.analyses/">dt.analyses/</a></li>`;
+      return `<li><a href="./${b}/latest/">${b}/latest</a></li>`;
+    })
     .join("\n");
 
   const html = `<!DOCTYPE html>
