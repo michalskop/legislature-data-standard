@@ -48,9 +48,9 @@ const SCHEMAS: SchemaItem[] = [
   { name: "DtOrganizations",     fileBase: "organizations.dt",     zod: DtOrganizationsSchema },
   { name: "DtMembership",        fileBase: "membership.dt",        zod: DtMembershipSchema },
   { name: "DtMemberships",       fileBase: "memberships.dt",       zod: DtMembershipsSchema },
-  { name: "DtPersonsTableRow",   fileBase: "persons-table.dt",     zod: DtPersonsTableRowSchema },
+  { name: "DtTablePersonsRow",   fileBase: "persons-table.dt",     zod: DtPersonsTableRowSchema },
   { name: "DtAnalysesCurrentMembers", fileBase: "current-members.dt.analyses", zod: DtAnalysesCurrentMembersSchema },
-  { name: "DtAnalysesCurrentMembersTableRow", fileBase: "current-members-table.dt.analyses", zod: DtAnalysesCurrentMembersTableRowSchema },
+  { name: "DtAnalysesTableCurrentMembersRow", fileBase: "current-members-table.dt.analyses", zod: DtAnalysesCurrentMembersTableRowSchema },
 ];
 
 const out = (p: string) => path.join(process.cwd(), p);
