@@ -3,9 +3,111 @@
   "info": {
     "title": "Legislature Data Standard",
     "version": "0.1.0",
-    "description": "Branch **dt.analyses/votes**, version **0.1.0**. Includes 15 schema(s)."
+    "description": "Branch **dt**, version **0.1.0**. Includes 19 schema(s)."
   },
   "paths": {
+    "/_schemas/membership-dt": {
+      "get": {
+        "summary": "Schema: membership.dt",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/membership.dt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/memberships-dt": {
+      "get": {
+        "summary": "Schema: memberships.dt",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/memberships.dt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/organization-dt": {
+      "get": {
+        "summary": "Schema: organization.dt",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/organization.dt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/organizations-dt": {
+      "get": {
+        "summary": "Schema: organizations.dt",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/organizations.dt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/person-dt": {
+      "get": {
+        "summary": "Schema: person.dt",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/person.dt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_schemas/persons-dt": {
+      "get": {
+        "summary": "Schema: persons.dt",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/persons.dt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/_schemas/area-popolo": {
       "get": {
         "summary": "Schema: area.popolo",
@@ -142,23 +244,6 @@
         }
       }
     },
-    "/_schemas/person-dt": {
-      "get": {
-        "summary": "Schema: person.dt",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/person.dt"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/_schemas/person-popolo": {
       "get": {
         "summary": "Schema: person.popolo",
@@ -169,23 +254,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/person.popolo"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/_schemas/persons-dt": {
-      "get": {
-        "summary": "Schema: persons.dt",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/persons.dt"
                 }
               }
             }
@@ -264,6 +332,3202 @@
   },
   "components": {
     "schemas": {
+      "membership.dt": {
+        "definitions": {
+          "DtMembership": {
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "label": {
+                    "type": "string",
+                    "description": "Label describing the membership."
+                  },
+                  "role": {
+                    "type": "string",
+                    "description": "The role fulfilled (string)."
+                  },
+                  "member_id": {
+                    "type": "string",
+                    "description": "If the member is an org, its ID."
+                  },
+                  "person_id": {
+                    "type": "string",
+                    "description": "If the member is a person, their ID."
+                  },
+                  "organization_id": {
+                    "type": "string",
+                    "description": "Organization in which the person/org is a member."
+                  },
+                  "post_id": {
+                    "type": "string",
+                    "description": "Post held by the member (optional)."
+                  },
+                  "on_behalf_of_id": {
+                    "type": "string",
+                    "description": "Org on whose behalf the person is a member."
+                  },
+                  "area_id": {
+                    "type": "string",
+                    "description": "Related geographic area ID."
+                  },
+                  "start_date": {
+                    "type": "string",
+                    "description": "YYYY-MM-DD start."
+                  },
+                  "end_date": {
+                    "type": "string",
+                    "description": "YYYY-MM-DD end."
+                  },
+                  "contact_details": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
+                        },
+                        "label": {
+                          "type": "string"
+                        },
+                        "note": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "value"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "links": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "format": "uri"
+                        },
+                        "note": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "url"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "sources": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "format": "uri"
+                        },
+                        "note": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "url"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "created_at": {
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "properties": {}
+              }
+            ]
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label describing the membership."
+              },
+              "role": {
+                "type": "string",
+                "description": "The role fulfilled (string)."
+              },
+              "member_id": {
+                "type": "string",
+                "description": "If the member is an org, its ID."
+              },
+              "person_id": {
+                "type": "string",
+                "description": "If the member is a person, their ID."
+              },
+              "organization_id": {
+                "type": "string",
+                "description": "Organization in which the person/org is a member."
+              },
+              "post_id": {
+                "type": "string",
+                "description": "Post held by the member (optional)."
+              },
+              "on_behalf_of_id": {
+                "type": "string",
+                "description": "Org on whose behalf the person is a member."
+              },
+              "area_id": {
+                "type": "string",
+                "description": "Related geographic area ID."
+              },
+              "start_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD start."
+              },
+              "end_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD end."
+              },
+              "contact_details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {}
+          }
+        ]
+      },
+      "memberships.dt": {
+        "definitions": {
+          "DtMemberships": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Label describing the membership."
+                    },
+                    "role": {
+                      "type": "string",
+                      "description": "The role fulfilled (string)."
+                    },
+                    "member_id": {
+                      "type": "string",
+                      "description": "If the member is an org, its ID."
+                    },
+                    "person_id": {
+                      "type": "string",
+                      "description": "If the member is a person, their ID."
+                    },
+                    "organization_id": {
+                      "type": "string",
+                      "description": "Organization in which the person/org is a member."
+                    },
+                    "post_id": {
+                      "type": "string",
+                      "description": "Post held by the member (optional)."
+                    },
+                    "on_behalf_of_id": {
+                      "type": "string",
+                      "description": "Org on whose behalf the person is a member."
+                    },
+                    "area_id": {
+                      "type": "string",
+                      "description": "Related geographic area ID."
+                    },
+                    "start_date": {
+                      "type": "string",
+                      "description": "YYYY-MM-DD start."
+                    },
+                    "end_date": {
+                      "type": "string",
+                      "description": "YYYY-MM-DD end."
+                    },
+                    "contact_details": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          },
+                          "label": {
+                            "type": "string"
+                          },
+                          "note": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "value"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "note": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "url"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "sources": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "note": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "url"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {}
+                }
+              ]
+            }
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "array",
+        "items": {
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label describing the membership."
+                },
+                "role": {
+                  "type": "string",
+                  "description": "The role fulfilled (string)."
+                },
+                "member_id": {
+                  "type": "string",
+                  "description": "If the member is an org, its ID."
+                },
+                "person_id": {
+                  "type": "string",
+                  "description": "If the member is a person, their ID."
+                },
+                "organization_id": {
+                  "type": "string",
+                  "description": "Organization in which the person/org is a member."
+                },
+                "post_id": {
+                  "type": "string",
+                  "description": "Post held by the member (optional)."
+                },
+                "on_behalf_of_id": {
+                  "type": "string",
+                  "description": "Org on whose behalf the person is a member."
+                },
+                "area_id": {
+                  "type": "string",
+                  "description": "Related geographic area ID."
+                },
+                "start_date": {
+                  "type": "string",
+                  "description": "YYYY-MM-DD start."
+                },
+                "end_date": {
+                  "type": "string",
+                  "description": "YYYY-MM-DD end."
+                },
+                "contact_details": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "note": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "note": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "sources": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "note": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {}
+            }
+          ]
+        }
+      },
+      "organization.dt": {
+        "definitions": {
+          "DtOrganization": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string",
+                "description": "Primary name."
+              },
+              "other_names": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "type": "string"
+                    },
+                    "end_date": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "additionalProperties": false
+                },
+                "description": "Alternate and former names."
+              },
+              "identifiers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "scheme": {
+                      "type": "string"
+                    },
+                    "identifier": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "scheme",
+                    "identifier"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "classification": {
+                "type": "string",
+                "description": "Organizational category, e.g., committee, party."
+              },
+              "parent": {
+                "type": "string",
+                "description": "Human name or object ref (use parent_id for linkage)."
+              },
+              "parent_id": {
+                "type": "string",
+                "description": "ID of the parent org."
+              },
+              "area_id": {
+                "type": "string",
+                "description": "Related geographic area ID."
+              },
+              "summary": {
+                "type": "string",
+                "description": "One-line description."
+              },
+              "description": {
+                "type": "string",
+                "description": "Longer description."
+              },
+              "founding_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD."
+              },
+              "dissolution_date": {
+                "type": "string",
+                "description": "YYYY-MM-DD."
+              },
+              "image": {
+                "type": "string",
+                "format": "uri"
+              },
+              "contact_details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Primary name."
+          },
+          "other_names": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "start_date": {
+                  "type": "string"
+                },
+                "end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Alternate and former names."
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "scheme": {
+                  "type": "string"
+                },
+                "identifier": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "scheme",
+                "identifier"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "classification": {
+            "type": "string",
+            "description": "Organizational category, e.g., committee, party."
+          },
+          "parent": {
+            "type": "string",
+            "description": "Human name or object ref (use parent_id for linkage)."
+          },
+          "parent_id": {
+            "type": "string",
+            "description": "ID of the parent org."
+          },
+          "area_id": {
+            "type": "string",
+            "description": "Related geographic area ID."
+          },
+          "summary": {
+            "type": "string",
+            "description": "One-line description."
+          },
+          "description": {
+            "type": "string",
+            "description": "Longer description."
+          },
+          "founding_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD."
+          },
+          "dissolution_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD."
+          },
+          "image": {
+            "type": "string",
+            "format": "uri"
+          },
+          "contact_details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "organizations.dt": {
+        "definitions": {
+          "DtOrganizations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Primary name."
+                },
+                "other_names": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "note": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "type": "string"
+                      },
+                      "end_date": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Alternate and former names."
+                },
+                "identifiers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "scheme": {
+                        "type": "string"
+                      },
+                      "identifier": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "scheme",
+                      "identifier"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "classification": {
+                  "type": "string",
+                  "description": "Organizational category, e.g., committee, party."
+                },
+                "parent": {
+                  "type": "string",
+                  "description": "Human name or object ref (use parent_id for linkage)."
+                },
+                "parent_id": {
+                  "type": "string",
+                  "description": "ID of the parent org."
+                },
+                "area_id": {
+                  "type": "string",
+                  "description": "Related geographic area ID."
+                },
+                "summary": {
+                  "type": "string",
+                  "description": "One-line description."
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Longer description."
+                },
+                "founding_date": {
+                  "type": "string",
+                  "description": "YYYY-MM-DD."
+                },
+                "dissolution_date": {
+                  "type": "string",
+                  "description": "YYYY-MM-DD."
+                },
+                "image": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "contact_details": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "note": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "note": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "sources": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "note": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string",
+              "description": "Primary name."
+            },
+            "other_names": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "note": {
+                    "type": "string"
+                  },
+                  "start_date": {
+                    "type": "string"
+                  },
+                  "end_date": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "additionalProperties": false
+              },
+              "description": "Alternate and former names."
+            },
+            "identifiers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "scheme": {
+                    "type": "string"
+                  },
+                  "identifier": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "scheme",
+                  "identifier"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "classification": {
+              "type": "string",
+              "description": "Organizational category, e.g., committee, party."
+            },
+            "parent": {
+              "type": "string",
+              "description": "Human name or object ref (use parent_id for linkage)."
+            },
+            "parent_id": {
+              "type": "string",
+              "description": "ID of the parent org."
+            },
+            "area_id": {
+              "type": "string",
+              "description": "Related geographic area ID."
+            },
+            "summary": {
+              "type": "string",
+              "description": "One-line description."
+            },
+            "description": {
+              "type": "string",
+              "description": "Longer description."
+            },
+            "founding_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD."
+            },
+            "dissolution_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD."
+            },
+            "image": {
+              "type": "string",
+              "format": "uri"
+            },
+            "contact_details": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "value"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "links": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "url"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "url"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "person.dt": {
+        "definitions": {
+          "DtPerson": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string",
+                "description": "Canonical display name."
+              },
+              "other_names": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "end_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "identifiers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "scheme": {
+                      "type": "string"
+                    },
+                    "identifier": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "scheme",
+                    "identifier"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "gender": {
+                "type": "string"
+              },
+              "pronouns": {
+                "type": "string"
+              },
+              "birth_date": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "death_date": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "image": {
+                "type": "string",
+                "format": "uri"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "biography": {
+                "type": "string"
+              },
+              "national_identity": {
+                "type": "string"
+              },
+              "contact_details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "created_at": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "updated_at": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "not": {}
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "given_names": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Ordered given/first names."
+              },
+              "family_names": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Ordered family/surnames (supports multiple)."
+              },
+              "given_name": {
+                "type": "string",
+                "description": "Single given name; normalized into given_names."
+              },
+              "family_name": {
+                "type": "string",
+                "description": "Single family name; normalized into family_names."
+              },
+              "memberships": {
+                "type": "object",
+                "properties": {
+                  "parliament": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "start_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "end_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "description": "Membership in a parliamentary term."
+                  },
+                  "groups": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "start_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "end_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "description": "Membership in parliamentary groups."
+                  },
+                  "candidate_list": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "start_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "end_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "description": "Membership on a candidate list."
+                  },
+                  "constituency": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "start_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "end_date": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "description": "Representation of a constituency."
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Canonical display name."
+          },
+          "other_names": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "start_date": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "end_date": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "scheme": {
+                  "type": "string"
+                },
+                "identifier": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "scheme",
+                "identifier"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "pronouns": {
+            "type": "string"
+          },
+          "birth_date": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "death_date": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "image": {
+            "type": "string",
+            "format": "uri"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "biography": {
+            "type": "string"
+          },
+          "national_identity": {
+            "type": "string"
+          },
+          "contact_details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "given_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Ordered given/first names."
+          },
+          "family_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Ordered family/surnames (supports multiple)."
+          },
+          "given_name": {
+            "type": "string",
+            "description": "Single given name; normalized into given_names."
+          },
+          "family_name": {
+            "type": "string",
+            "description": "Single family name; normalized into family_names."
+          },
+          "memberships": {
+            "type": "object",
+            "properties": {
+              "parliament": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "end_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "additionalProperties": false
+                },
+                "description": "Membership in a parliamentary term."
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "end_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "additionalProperties": false
+                },
+                "description": "Membership in parliamentary groups."
+              },
+              "candidate_list": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "end_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "additionalProperties": false
+                },
+                "description": "Membership on a candidate list."
+              },
+              "constituency": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "start_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "end_date": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "not": {}
+                            },
+                            {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "additionalProperties": false
+                },
+                "description": "Representation of a constituency."
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "persons.dt": {
+        "definitions": {
+          "DtPersons": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Canonical display name."
+                },
+                "other_names": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "note": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "end_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "identifiers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "scheme": {
+                        "type": "string"
+                      },
+                      "identifier": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "scheme",
+                      "identifier"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                },
+                "gender": {
+                  "type": "string"
+                },
+                "pronouns": {
+                  "type": "string"
+                },
+                "birth_date": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "death_date": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "image": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "biography": {
+                  "type": "string"
+                },
+                "national_identity": {
+                  "type": "string"
+                },
+                "contact_details": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "note": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "note": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "sources": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "note": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "created_at": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "updated_at": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "given_names": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Ordered given/first names."
+                },
+                "family_names": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Ordered family/surnames (supports multiple)."
+                },
+                "given_name": {
+                  "type": "string",
+                  "description": "Single given name; normalized into given_names."
+                },
+                "family_name": {
+                  "type": "string",
+                  "description": "Single family name; normalized into family_names."
+                },
+                "memberships": {
+                  "type": "object",
+                  "properties": {
+                    "parliament": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "start_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "end_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "description": "Membership in a parliamentary term."
+                    },
+                    "groups": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "start_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "end_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "description": "Membership in parliamentary groups."
+                    },
+                    "candidate_list": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "start_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "end_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "description": "Membership on a candidate list."
+                    },
+                    "constituency": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "start_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "end_date": {
+                            "anyOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "not": {}
+                                  },
+                                  {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "description": "Representation of a constituency."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "id",
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string",
+              "description": "Canonical display name."
+            },
+            "other_names": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "note": {
+                    "type": "string"
+                  },
+                  "start_date": {
+                    "anyOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "not": {}
+                          },
+                          {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "end_date": {
+                    "anyOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "not": {}
+                          },
+                          {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "identifiers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "scheme": {
+                    "type": "string"
+                  },
+                  "identifier": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "scheme",
+                  "identifier"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "pronouns": {
+              "type": "string"
+            },
+            "birth_date": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "not": {}
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "death_date": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "not": {}
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "image": {
+              "type": "string",
+              "format": "uri"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "biography": {
+              "type": "string"
+            },
+            "national_identity": {
+              "type": "string"
+            },
+            "contact_details": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "value"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "links": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "url"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "url"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "created_at": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "not": {}
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "updated_at": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "not": {}
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "given_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Ordered given/first names."
+            },
+            "family_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Ordered family/surnames (supports multiple)."
+            },
+            "given_name": {
+              "type": "string",
+              "description": "Single given name; normalized into given_names."
+            },
+            "family_name": {
+              "type": "string",
+              "description": "Single family name; normalized into family_names."
+            },
+            "memberships": {
+              "type": "object",
+              "properties": {
+                "parliament": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "end_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Membership in a parliamentary term."
+                },
+                "groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "end_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Membership in parliamentary groups."
+                },
+                "candidate_list": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "end_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Membership on a candidate list."
+                },
+                "constituency": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "end_date": {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "not": {}
+                              },
+                              {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Representation of a constituency."
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "id",
+            "name"
+          ],
+          "additionalProperties": false
+        }
+      },
       "area.popolo": {
         "definitions": {
           "PopoloArea": {
@@ -1598,1009 +4862,6 @@
         ],
         "additionalProperties": false
       },
-      "person.dt": {
-        "definitions": {
-          "DtPerson": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string",
-                "description": "Canonical display name."
-              },
-              "other_names": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string"
-                    },
-                    "note": {
-                      "type": "string"
-                    },
-                    "start_date": {
-                      "anyOf": [
-                        {
-                          "anyOf": [
-                            {
-                              "not": {}
-                            },
-                            {
-                              "type": "string",
-                              "format": "date-time"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "end_date": {
-                      "anyOf": [
-                        {
-                          "anyOf": [
-                            {
-                              "not": {}
-                            },
-                            {
-                              "type": "string",
-                              "format": "date-time"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "name"
-                  ],
-                  "additionalProperties": false
-                }
-              },
-              "identifiers": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "scheme": {
-                      "type": "string"
-                    },
-                    "identifier": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "scheme",
-                    "identifier"
-                  ],
-                  "additionalProperties": false
-                }
-              },
-              "email": {
-                "type": "string",
-                "format": "email"
-              },
-              "gender": {
-                "type": "string"
-              },
-              "pronouns": {
-                "type": "string"
-              },
-              "birth_date": {
-                "anyOf": [
-                  {
-                    "anyOf": [
-                      {
-                        "not": {}
-                      },
-                      {
-                        "type": "string",
-                        "format": "date-time"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              },
-              "death_date": {
-                "anyOf": [
-                  {
-                    "anyOf": [
-                      {
-                        "not": {}
-                      },
-                      {
-                        "type": "string",
-                        "format": "date-time"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              },
-              "image": {
-                "type": "string",
-                "format": "uri"
-              },
-              "summary": {
-                "type": "string"
-              },
-              "biography": {
-                "type": "string"
-              },
-              "national_identity": {
-                "type": "string"
-              },
-              "contact_details": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "type": {
-                      "type": "string"
-                    },
-                    "value": {
-                      "type": "string"
-                    },
-                    "label": {
-                      "type": "string"
-                    },
-                    "note": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "type",
-                    "value"
-                  ],
-                  "additionalProperties": false
-                }
-              },
-              "links": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "url": {
-                      "type": "string",
-                      "format": "uri"
-                    },
-                    "note": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "url"
-                  ],
-                  "additionalProperties": false
-                }
-              },
-              "sources": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "url": {
-                      "type": "string",
-                      "format": "uri"
-                    },
-                    "note": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "url"
-                  ],
-                  "additionalProperties": false
-                }
-              },
-              "created_at": {
-                "anyOf": [
-                  {
-                    "anyOf": [
-                      {
-                        "not": {}
-                      },
-                      {
-                        "type": "string",
-                        "format": "date-time"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              },
-              "updated_at": {
-                "anyOf": [
-                  {
-                    "anyOf": [
-                      {
-                        "not": {}
-                      },
-                      {
-                        "type": "string",
-                        "format": "date-time"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              },
-              "given_names": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "description": "Ordered given/first names."
-              },
-              "family_names": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "description": "Ordered family/surnames (supports multiple)."
-              },
-              "given_name": {
-                "type": "string",
-                "description": "Single given name; normalized into given_names."
-              },
-              "family_name": {
-                "type": "string",
-                "description": "Single family name; normalized into family_names."
-              },
-              "memberships": {
-                "type": "object",
-                "properties": {
-                  "parliament": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "start_date": {
-                          "anyOf": [
-                            {
-                              "anyOf": [
-                                {
-                                  "not": {}
-                                },
-                                {
-                                  "type": "string",
-                                  "format": "date-time"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ]
-                        },
-                        "end_date": {
-                          "anyOf": [
-                            {
-                              "anyOf": [
-                                {
-                                  "not": {}
-                                },
-                                {
-                                  "type": "string",
-                                  "format": "date-time"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ]
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "name"
-                      ],
-                      "additionalProperties": false
-                    },
-                    "description": "Membership in a parliamentary term."
-                  },
-                  "groups": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "start_date": {
-                          "anyOf": [
-                            {
-                              "anyOf": [
-                                {
-                                  "not": {}
-                                },
-                                {
-                                  "type": "string",
-                                  "format": "date-time"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ]
-                        },
-                        "end_date": {
-                          "anyOf": [
-                            {
-                              "anyOf": [
-                                {
-                                  "not": {}
-                                },
-                                {
-                                  "type": "string",
-                                  "format": "date-time"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ]
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "name"
-                      ],
-                      "additionalProperties": false
-                    },
-                    "description": "Membership in parliamentary groups."
-                  },
-                  "candidate_list": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "start_date": {
-                          "anyOf": [
-                            {
-                              "anyOf": [
-                                {
-                                  "not": {}
-                                },
-                                {
-                                  "type": "string",
-                                  "format": "date-time"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ]
-                        },
-                        "end_date": {
-                          "anyOf": [
-                            {
-                              "anyOf": [
-                                {
-                                  "not": {}
-                                },
-                                {
-                                  "type": "string",
-                                  "format": "date-time"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ]
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "name"
-                      ],
-                      "additionalProperties": false
-                    },
-                    "description": "Membership on a candidate list."
-                  },
-                  "constituency": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "start_date": {
-                          "anyOf": [
-                            {
-                              "anyOf": [
-                                {
-                                  "not": {}
-                                },
-                                {
-                                  "type": "string",
-                                  "format": "date-time"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ]
-                        },
-                        "end_date": {
-                          "anyOf": [
-                            {
-                              "anyOf": [
-                                {
-                                  "not": {}
-                                },
-                                {
-                                  "type": "string",
-                                  "format": "date-time"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "null"
-                            }
-                          ]
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "name"
-                      ],
-                      "additionalProperties": false
-                    },
-                    "description": "Representation of a constituency."
-                  }
-                },
-                "additionalProperties": false
-              }
-            },
-            "required": [
-              "id",
-              "name"
-            ],
-            "additionalProperties": false
-          }
-        },
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string",
-            "description": "Canonical display name."
-          },
-          "other_names": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "note": {
-                  "type": "string"
-                },
-                "start_date": {
-                  "anyOf": [
-                    {
-                      "anyOf": [
-                        {
-                          "not": {}
-                        },
-                        {
-                          "type": "string",
-                          "format": "date-time"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "end_date": {
-                  "anyOf": [
-                    {
-                      "anyOf": [
-                        {
-                          "not": {}
-                        },
-                        {
-                          "type": "string",
-                          "format": "date-time"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "name"
-              ],
-              "additionalProperties": false
-            }
-          },
-          "identifiers": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "scheme": {
-                  "type": "string"
-                },
-                "identifier": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "scheme",
-                "identifier"
-              ],
-              "additionalProperties": false
-            }
-          },
-          "email": {
-            "type": "string",
-            "format": "email"
-          },
-          "gender": {
-            "type": "string"
-          },
-          "pronouns": {
-            "type": "string"
-          },
-          "birth_date": {
-            "anyOf": [
-              {
-                "anyOf": [
-                  {
-                    "not": {}
-                  },
-                  {
-                    "type": "string",
-                    "format": "date-time"
-                  }
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "death_date": {
-            "anyOf": [
-              {
-                "anyOf": [
-                  {
-                    "not": {}
-                  },
-                  {
-                    "type": "string",
-                    "format": "date-time"
-                  }
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "image": {
-            "type": "string",
-            "format": "uri"
-          },
-          "summary": {
-            "type": "string"
-          },
-          "biography": {
-            "type": "string"
-          },
-          "national_identity": {
-            "type": "string"
-          },
-          "contact_details": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string"
-                },
-                "value": {
-                  "type": "string"
-                },
-                "label": {
-                  "type": "string"
-                },
-                "note": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "type",
-                "value"
-              ],
-              "additionalProperties": false
-            }
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "format": "uri"
-                },
-                "note": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "url"
-              ],
-              "additionalProperties": false
-            }
-          },
-          "sources": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "format": "uri"
-                },
-                "note": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "url"
-              ],
-              "additionalProperties": false
-            }
-          },
-          "created_at": {
-            "anyOf": [
-              {
-                "anyOf": [
-                  {
-                    "not": {}
-                  },
-                  {
-                    "type": "string",
-                    "format": "date-time"
-                  }
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "updated_at": {
-            "anyOf": [
-              {
-                "anyOf": [
-                  {
-                    "not": {}
-                  },
-                  {
-                    "type": "string",
-                    "format": "date-time"
-                  }
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "given_names": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Ordered given/first names."
-          },
-          "family_names": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Ordered family/surnames (supports multiple)."
-          },
-          "given_name": {
-            "type": "string",
-            "description": "Single given name; normalized into given_names."
-          },
-          "family_name": {
-            "type": "string",
-            "description": "Single family name; normalized into family_names."
-          },
-          "memberships": {
-            "type": "object",
-            "properties": {
-              "parliament": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "start_date": {
-                      "anyOf": [
-                        {
-                          "anyOf": [
-                            {
-                              "not": {}
-                            },
-                            {
-                              "type": "string",
-                              "format": "date-time"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "end_date": {
-                      "anyOf": [
-                        {
-                          "anyOf": [
-                            {
-                              "not": {}
-                            },
-                            {
-                              "type": "string",
-                              "format": "date-time"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name"
-                  ],
-                  "additionalProperties": false
-                },
-                "description": "Membership in a parliamentary term."
-              },
-              "groups": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "start_date": {
-                      "anyOf": [
-                        {
-                          "anyOf": [
-                            {
-                              "not": {}
-                            },
-                            {
-                              "type": "string",
-                              "format": "date-time"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "end_date": {
-                      "anyOf": [
-                        {
-                          "anyOf": [
-                            {
-                              "not": {}
-                            },
-                            {
-                              "type": "string",
-                              "format": "date-time"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name"
-                  ],
-                  "additionalProperties": false
-                },
-                "description": "Membership in parliamentary groups."
-              },
-              "candidate_list": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "start_date": {
-                      "anyOf": [
-                        {
-                          "anyOf": [
-                            {
-                              "not": {}
-                            },
-                            {
-                              "type": "string",
-                              "format": "date-time"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "end_date": {
-                      "anyOf": [
-                        {
-                          "anyOf": [
-                            {
-                              "not": {}
-                            },
-                            {
-                              "type": "string",
-                              "format": "date-time"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name"
-                  ],
-                  "additionalProperties": false
-                },
-                "description": "Membership on a candidate list."
-              },
-              "constituency": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "start_date": {
-                      "anyOf": [
-                        {
-                          "anyOf": [
-                            {
-                              "not": {}
-                            },
-                            {
-                              "type": "string",
-                              "format": "date-time"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "end_date": {
-                      "anyOf": [
-                        {
-                          "anyOf": [
-                            {
-                              "not": {}
-                            },
-                            {
-                              "type": "string",
-                              "format": "date-time"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name"
-                  ],
-                  "additionalProperties": false
-                },
-                "description": "Representation of a constituency."
-              }
-            },
-            "additionalProperties": false
-          }
-        },
-        "required": [
-          "id",
-          "name"
-        ],
-        "additionalProperties": false
-      },
       "person.popolo": {
         "definitions": {
           "PopoloPerson": {
@@ -3097,1015 +5358,6 @@
           "name"
         ],
         "additionalProperties": false
-      },
-      "persons.dt": {
-        "definitions": {
-          "DtPersons": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "Canonical display name."
-                },
-                "other_names": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "note": {
-                        "type": "string"
-                      },
-                      "start_date": {
-                        "anyOf": [
-                          {
-                            "anyOf": [
-                              {
-                                "not": {}
-                              },
-                              {
-                                "type": "string",
-                                "format": "date-time"
-                              }
-                            ]
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      },
-                      "end_date": {
-                        "anyOf": [
-                          {
-                            "anyOf": [
-                              {
-                                "not": {}
-                              },
-                              {
-                                "type": "string",
-                                "format": "date-time"
-                              }
-                            ]
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      }
-                    },
-                    "required": [
-                      "name"
-                    ],
-                    "additionalProperties": false
-                  }
-                },
-                "identifiers": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "scheme": {
-                        "type": "string"
-                      },
-                      "identifier": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "scheme",
-                      "identifier"
-                    ],
-                    "additionalProperties": false
-                  }
-                },
-                "email": {
-                  "type": "string",
-                  "format": "email"
-                },
-                "gender": {
-                  "type": "string"
-                },
-                "pronouns": {
-                  "type": "string"
-                },
-                "birth_date": {
-                  "anyOf": [
-                    {
-                      "anyOf": [
-                        {
-                          "not": {}
-                        },
-                        {
-                          "type": "string",
-                          "format": "date-time"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "death_date": {
-                  "anyOf": [
-                    {
-                      "anyOf": [
-                        {
-                          "not": {}
-                        },
-                        {
-                          "type": "string",
-                          "format": "date-time"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "image": {
-                  "type": "string",
-                  "format": "uri"
-                },
-                "summary": {
-                  "type": "string"
-                },
-                "biography": {
-                  "type": "string"
-                },
-                "national_identity": {
-                  "type": "string"
-                },
-                "contact_details": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "type": {
-                        "type": "string"
-                      },
-                      "value": {
-                        "type": "string"
-                      },
-                      "label": {
-                        "type": "string"
-                      },
-                      "note": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "type",
-                      "value"
-                    ],
-                    "additionalProperties": false
-                  }
-                },
-                "links": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "url": {
-                        "type": "string",
-                        "format": "uri"
-                      },
-                      "note": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "url"
-                    ],
-                    "additionalProperties": false
-                  }
-                },
-                "sources": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "url": {
-                        "type": "string",
-                        "format": "uri"
-                      },
-                      "note": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "url"
-                    ],
-                    "additionalProperties": false
-                  }
-                },
-                "created_at": {
-                  "anyOf": [
-                    {
-                      "anyOf": [
-                        {
-                          "not": {}
-                        },
-                        {
-                          "type": "string",
-                          "format": "date-time"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "updated_at": {
-                  "anyOf": [
-                    {
-                      "anyOf": [
-                        {
-                          "not": {}
-                        },
-                        {
-                          "type": "string",
-                          "format": "date-time"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "given_names": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "Ordered given/first names."
-                },
-                "family_names": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "Ordered family/surnames (supports multiple)."
-                },
-                "given_name": {
-                  "type": "string",
-                  "description": "Single given name; normalized into given_names."
-                },
-                "family_name": {
-                  "type": "string",
-                  "description": "Single family name; normalized into family_names."
-                },
-                "memberships": {
-                  "type": "object",
-                  "properties": {
-                    "parliament": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "start_date": {
-                            "anyOf": [
-                              {
-                                "anyOf": [
-                                  {
-                                    "not": {}
-                                  },
-                                  {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "null"
-                              }
-                            ]
-                          },
-                          "end_date": {
-                            "anyOf": [
-                              {
-                                "anyOf": [
-                                  {
-                                    "not": {}
-                                  },
-                                  {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "null"
-                              }
-                            ]
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "name"
-                        ],
-                        "additionalProperties": false
-                      },
-                      "description": "Membership in a parliamentary term."
-                    },
-                    "groups": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "start_date": {
-                            "anyOf": [
-                              {
-                                "anyOf": [
-                                  {
-                                    "not": {}
-                                  },
-                                  {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "null"
-                              }
-                            ]
-                          },
-                          "end_date": {
-                            "anyOf": [
-                              {
-                                "anyOf": [
-                                  {
-                                    "not": {}
-                                  },
-                                  {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "null"
-                              }
-                            ]
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "name"
-                        ],
-                        "additionalProperties": false
-                      },
-                      "description": "Membership in parliamentary groups."
-                    },
-                    "candidate_list": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "start_date": {
-                            "anyOf": [
-                              {
-                                "anyOf": [
-                                  {
-                                    "not": {}
-                                  },
-                                  {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "null"
-                              }
-                            ]
-                          },
-                          "end_date": {
-                            "anyOf": [
-                              {
-                                "anyOf": [
-                                  {
-                                    "not": {}
-                                  },
-                                  {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "null"
-                              }
-                            ]
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "name"
-                        ],
-                        "additionalProperties": false
-                      },
-                      "description": "Membership on a candidate list."
-                    },
-                    "constituency": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "start_date": {
-                            "anyOf": [
-                              {
-                                "anyOf": [
-                                  {
-                                    "not": {}
-                                  },
-                                  {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "null"
-                              }
-                            ]
-                          },
-                          "end_date": {
-                            "anyOf": [
-                              {
-                                "anyOf": [
-                                  {
-                                    "not": {}
-                                  },
-                                  {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "null"
-                              }
-                            ]
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "name"
-                        ],
-                        "additionalProperties": false
-                      },
-                      "description": "Representation of a constituency."
-                    }
-                  },
-                  "additionalProperties": false
-                }
-              },
-              "required": [
-                "id",
-                "name"
-              ],
-              "additionalProperties": false
-            }
-          }
-        },
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string",
-              "description": "Canonical display name."
-            },
-            "other_names": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "note": {
-                    "type": "string"
-                  },
-                  "start_date": {
-                    "anyOf": [
-                      {
-                        "anyOf": [
-                          {
-                            "not": {}
-                          },
-                          {
-                            "type": "string",
-                            "format": "date-time"
-                          }
-                        ]
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "end_date": {
-                    "anyOf": [
-                      {
-                        "anyOf": [
-                          {
-                            "not": {}
-                          },
-                          {
-                            "type": "string",
-                            "format": "date-time"
-                          }
-                        ]
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  }
-                },
-                "required": [
-                  "name"
-                ],
-                "additionalProperties": false
-              }
-            },
-            "identifiers": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "scheme": {
-                    "type": "string"
-                  },
-                  "identifier": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "scheme",
-                  "identifier"
-                ],
-                "additionalProperties": false
-              }
-            },
-            "email": {
-              "type": "string",
-              "format": "email"
-            },
-            "gender": {
-              "type": "string"
-            },
-            "pronouns": {
-              "type": "string"
-            },
-            "birth_date": {
-              "anyOf": [
-                {
-                  "anyOf": [
-                    {
-                      "not": {}
-                    },
-                    {
-                      "type": "string",
-                      "format": "date-time"
-                    }
-                  ]
-                },
-                {
-                  "type": "null"
-                }
-              ]
-            },
-            "death_date": {
-              "anyOf": [
-                {
-                  "anyOf": [
-                    {
-                      "not": {}
-                    },
-                    {
-                      "type": "string",
-                      "format": "date-time"
-                    }
-                  ]
-                },
-                {
-                  "type": "null"
-                }
-              ]
-            },
-            "image": {
-              "type": "string",
-              "format": "uri"
-            },
-            "summary": {
-              "type": "string"
-            },
-            "biography": {
-              "type": "string"
-            },
-            "national_identity": {
-              "type": "string"
-            },
-            "contact_details": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
-                  },
-                  "label": {
-                    "type": "string"
-                  },
-                  "note": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "type",
-                  "value"
-                ],
-                "additionalProperties": false
-              }
-            },
-            "links": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "url": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "note": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "url"
-                ],
-                "additionalProperties": false
-              }
-            },
-            "sources": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "url": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "note": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "url"
-                ],
-                "additionalProperties": false
-              }
-            },
-            "created_at": {
-              "anyOf": [
-                {
-                  "anyOf": [
-                    {
-                      "not": {}
-                    },
-                    {
-                      "type": "string",
-                      "format": "date-time"
-                    }
-                  ]
-                },
-                {
-                  "type": "null"
-                }
-              ]
-            },
-            "updated_at": {
-              "anyOf": [
-                {
-                  "anyOf": [
-                    {
-                      "not": {}
-                    },
-                    {
-                      "type": "string",
-                      "format": "date-time"
-                    }
-                  ]
-                },
-                {
-                  "type": "null"
-                }
-              ]
-            },
-            "given_names": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Ordered given/first names."
-            },
-            "family_names": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Ordered family/surnames (supports multiple)."
-            },
-            "given_name": {
-              "type": "string",
-              "description": "Single given name; normalized into given_names."
-            },
-            "family_name": {
-              "type": "string",
-              "description": "Single family name; normalized into family_names."
-            },
-            "memberships": {
-              "type": "object",
-              "properties": {
-                "parliament": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "start_date": {
-                        "anyOf": [
-                          {
-                            "anyOf": [
-                              {
-                                "not": {}
-                              },
-                              {
-                                "type": "string",
-                                "format": "date-time"
-                              }
-                            ]
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      },
-                      "end_date": {
-                        "anyOf": [
-                          {
-                            "anyOf": [
-                              {
-                                "not": {}
-                              },
-                              {
-                                "type": "string",
-                                "format": "date-time"
-                              }
-                            ]
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "name"
-                    ],
-                    "additionalProperties": false
-                  },
-                  "description": "Membership in a parliamentary term."
-                },
-                "groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "start_date": {
-                        "anyOf": [
-                          {
-                            "anyOf": [
-                              {
-                                "not": {}
-                              },
-                              {
-                                "type": "string",
-                                "format": "date-time"
-                              }
-                            ]
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      },
-                      "end_date": {
-                        "anyOf": [
-                          {
-                            "anyOf": [
-                              {
-                                "not": {}
-                              },
-                              {
-                                "type": "string",
-                                "format": "date-time"
-                              }
-                            ]
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "name"
-                    ],
-                    "additionalProperties": false
-                  },
-                  "description": "Membership in parliamentary groups."
-                },
-                "candidate_list": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "start_date": {
-                        "anyOf": [
-                          {
-                            "anyOf": [
-                              {
-                                "not": {}
-                              },
-                              {
-                                "type": "string",
-                                "format": "date-time"
-                              }
-                            ]
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      },
-                      "end_date": {
-                        "anyOf": [
-                          {
-                            "anyOf": [
-                              {
-                                "not": {}
-                              },
-                              {
-                                "type": "string",
-                                "format": "date-time"
-                              }
-                            ]
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "name"
-                    ],
-                    "additionalProperties": false
-                  },
-                  "description": "Membership on a candidate list."
-                },
-                "constituency": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "start_date": {
-                        "anyOf": [
-                          {
-                            "anyOf": [
-                              {
-                                "not": {}
-                              },
-                              {
-                                "type": "string",
-                                "format": "date-time"
-                              }
-                            ]
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      },
-                      "end_date": {
-                        "anyOf": [
-                          {
-                            "anyOf": [
-                              {
-                                "not": {}
-                              },
-                              {
-                                "type": "string",
-                                "format": "date-time"
-                              }
-                            ]
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "name"
-                    ],
-                    "additionalProperties": false
-                  },
-                  "description": "Representation of a constituency."
-                }
-              },
-              "additionalProperties": false
-            }
-          },
-          "required": [
-            "id",
-            "name"
-          ],
-          "additionalProperties": false
-        }
       },
       "post.popolo": {
         "definitions": {
