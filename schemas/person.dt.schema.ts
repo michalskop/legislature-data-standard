@@ -25,6 +25,8 @@ export const DtPersonSchema = PopoloPersonSchema.extend({
   family_names: z.array(z.string()).optional()
     .describe("Ordered family/surnames (supports multiple)."),
 
+  gender: z.string().optional().nullable().describe("Recommended values: \"male\", \"female\". Other values allowed. Examples: \"male\", \"female\", \"other\", \"undisclosed\", null."),
+
   // Convenience inputs we normalize from
   given_name: z.string().optional().describe("Single given name; normalized into given_names."),
   family_name: z.string().optional().describe("Single family name; normalized into family_names."),
