@@ -42,6 +42,28 @@ fs.mkdirSync("stage/schemas", { recursive: true });
 fs.copyFileSync("index.html", "stage/index.html");
 fs.copyFileSync(specFile, `stage/${specFile}`);
 
+function writeSchemasIndex(fileNames) {
+  const list = fileNames
+    .slice()
+    .sort()
+    .map((f) => `<li><a href="./${f}">${f}</a></li>`)
+    .join("\n");
+
+  const html = `<!DOCTYPE html>
+  <html lang="en">
+  <meta charset="utf-8">
+  <title>Schemas</title>
+  <body style="font-family: sans-serif; max-width: 900px; margin: 3em auto;">
+    <h1>Schemas</h1>
+    <p>Published JSON Schemas and Frictionless Table Schemas for branch <b>${branch || "(none)"}</b>, version <b>${version}</b>.</p>
+    <ul>
+      ${list}
+    </ul>
+  </body></html>`;
+
+  fs.writeFileSync(path.join("stage", "schemas", "index.html"), html);
+}
+
 // schema filter
 const schemaFilter = (full, name) => {
   if (branch === "popolo") return /\.popolo\.(table\.)?json$/.test(name);
@@ -54,12 +76,16 @@ const schemaFilter = (full, name) => {
 };
 
 // copy only filtered schemas
+const copiedSchemaNames = [];
 for (const full of listFilesRecursive("schemas")) {
   const name = path.basename(full);
   if (schemaFilter(full, name)) {
     fs.copyFileSync(full, path.join("stage", "schemas", name));
+    copiedSchemaNames.push(name);
   }
 }
+
+writeSchemasIndex(copiedSchemaNames);
 
 const destBase   = branch ? path.join("dist", branch) : "dist";
 const destVer    = path.join(destBase, version);
