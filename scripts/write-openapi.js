@@ -64,6 +64,7 @@ function examplesForTitle(title) {
 
 (async () => {
   const version = process.env.STD_VERSION || "latest";
+  const pagesBase = process.env.STD_PAGES_BASE || "/legislature-data-standard";
   const filesAll = listSchemaJsonFiles("schemas")
     .map(f => f.replace(/\\/g, "/"))
     .sort();
@@ -93,9 +94,14 @@ function examplesForTitle(title) {
     }
   }
 
+  const serverUrl = [pagesBase, branch || null, version]
+    .filter(Boolean)
+    .join("/")
+    .replace(/\/+/g, "/");
+
   const spec = {
     openapi: "3.0.3",
-    servers: [{ url: "." }],
+    servers: [{ url: serverUrl }],
     info: {
       title: "Legislature Data Standard",
       version,
