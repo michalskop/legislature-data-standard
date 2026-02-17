@@ -21,6 +21,7 @@ export const DtVoteEventSchema = PopoloVoteEventSchema.extend({
   ),
 
   requirement: z.string().optional().describe("Voting requirement for this vote-event (e.g., simple majority, 3/5)."),
+  extras: z.record(z.any()).optional().describe("Additional metadata fields not covered by the core schema (e.g., sitting number, agenda item)."),
 });
 
 export type DtVoteEvent = z.infer<typeof DtVoteEventSchema>;
