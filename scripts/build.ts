@@ -22,6 +22,7 @@ import { DtOrganizationsSchema } from "../schemas/organizations.dt.schema";
 import { DtMembershipSchema } from "../schemas/membership.dt.schema";
 import { DtMembershipsSchema } from "../schemas/memberships.dt.schema";
 import { DtAnalysesCurrentMembersSchema } from "../schemas/current-members.dt.analyses.schema";
+import { DtPersonsTableRowSchema } from "../schemas/persons-table.dt.schema";
 
 
 type SchemaItem = { name: string; fileBase: string; zod: any };
@@ -46,6 +47,7 @@ const SCHEMAS: SchemaItem[] = [
   { name: "DtOrganizations",     fileBase: "organizations.dt",     zod: DtOrganizationsSchema },
   { name: "DtMembership",        fileBase: "membership.dt",        zod: DtMembershipSchema },
   { name: "DtMemberships",       fileBase: "memberships.dt",       zod: DtMembershipsSchema },
+  { name: "DtPersonsTableRow",   fileBase: "persons-table.dt",     zod: DtPersonsTableRowSchema },
   { name: "DtAnalysesCurrentMembers", fileBase: "current-members.dt.analyses", zod: DtAnalysesCurrentMembersSchema },
 ];
 
