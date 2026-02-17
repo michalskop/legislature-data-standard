@@ -40,6 +40,10 @@ import { DtAnalysesCurrentMembersTableRowSchema } from "../schemas/current-membe
 import { DtAnalysesAllMembersTableRowSchema } from "../schemas/all-members-table.dt.analyses.schema";
 import { DtAnalysesCurrentGroupsTableRowSchema } from "../schemas/current-groups-table.dt.analyses.schema";
 import { DtAnalysesAllGroupsTableRowSchema } from "../schemas/all-groups-table.dt.analyses.schema";
+import { DtAnalysesAttendanceDefinitionSchema } from "../schemas/attendance-definition.dt.analyses.schema";
+import { DtAnalysesAttendanceDefinitionTableRowSchema } from "../schemas/attendance-definition-table.dt.analyses.schema";
+import { DtAnalysesAttendanceSchema } from "../schemas/attendance.dt.analyses.schema";
+import { DtAnalysesAttendanceTableRowSchema } from "../schemas/attendance-table.dt.analyses.schema";
 
 
 type SchemaItem = { name: string; fileBase: string; zod: any };
@@ -83,6 +87,10 @@ const SCHEMAS: SchemaItem[] = [
   { name: "DtAnalysesTableCurrentGroupsRow", fileBase: "current-groups-table.dt.analyses", zod: DtAnalysesCurrentGroupsTableRowSchema },
   { name: "DtAnalysesAllGroups", fileBase: "all-groups.dt.analyses", zod: DtAnalysesAllGroupsSchema },
   { name: "DtAnalysesTableAllGroupsRow", fileBase: "all-groups-table.dt.analyses", zod: DtAnalysesAllGroupsTableRowSchema },
+  { name: "DtAnalysesAttendanceDefinition", fileBase: "attendance-definition.dt.analyses", zod: DtAnalysesAttendanceDefinitionSchema },
+  { name: "DtAnalysesTableAttendanceDefinitionRow", fileBase: "attendance-definition-table.dt.analyses", zod: DtAnalysesAttendanceDefinitionTableRowSchema },
+  { name: "DtAnalysesAttendance", fileBase: "attendance.dt.analyses", zod: DtAnalysesAttendanceSchema },
+  { name: "DtAnalysesTableAttendanceRow", fileBase: "attendance-table.dt.analyses", zod: DtAnalysesAttendanceTableRowSchema },
 ];
 
 const out = (p: string) => path.join(process.cwd(), p);
