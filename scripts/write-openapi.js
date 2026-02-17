@@ -41,6 +41,27 @@ function titleFromJson(file) {
 
 function toKebab(s){ return s.replace(/([a-z])([A-Z])/g,"$1-$2").replace(/\./g,"-").toLowerCase(); }
 
+function examplesForTitle(title) {
+  if (title === "DtAnalysesCurrentTerm") {
+    return {
+      null: { summary: "Unknown current term", value: null },
+      example: {
+        summary: "Example current term",
+        value: {
+          id: "term-2025",
+          name: "2025-",
+          since: "2025-01-01",
+          until: null,
+          until_latest: "2029-12-31",
+          identifiers: [{ scheme: "official", identifier: "10" }],
+          note: "Example only"
+        }
+      }
+    };
+  }
+  return null;
+}
+
 (async () => {
   const version = process.env.STD_VERSION || "latest";
   const filesAll = listSchemaJsonFiles("schemas")
@@ -59,12 +80,17 @@ function toKebab(s){ return s.replace(/([a-z])([A-Z])/g,"$1-$2").replace(/\./g,"
     const title = titleFromJson(full) || path.basename(full, ".json");
     components[title] = deref;
     const slug = toKebab(title);
+    const examples = examplesForTitle(title);
     paths[`/_schemas/${slug}`] = {
       get: {
         summary: `Schema: ${title}`,
         responses: { "200": { description: "OK", content: { "application/json": { schema: { $ref: `#/components/schemas/${title}` } } } } }
       }
     };
+
+    if (examples) {
+      paths[`/_schemas/${slug}`].get.responses["200"].content["application/json"].examples = examples;
+    }
   }
 
   const spec = {
