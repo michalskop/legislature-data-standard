@@ -4,6 +4,19 @@ const path = require("path");
 const version = process.env.STD_VERSION || "latest";
 const branch  = process.env.STD_BRANCH  || "";
 
+function listFilesRecursive(dir) {
+  const out = [];
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, ent.name);
+    if (ent.isDirectory()) {
+      out.push(...listFilesRecursive(full));
+    } else if (ent.isFile()) {
+      out.push(full);
+    }
+  }
+  return out;
+}
+
 function copyTree(src, dst, filterFn = null) {
   fs.mkdirSync(dst, { recursive: true });
   for (const f of fs.readdirSync(src)) {
@@ -37,9 +50,10 @@ const schemaFilter = (full, name) => {
 };
 
 // copy only filtered schemas
-for (const f of fs.readdirSync("schemas")) {
-  if (schemaFilter(path.join("schemas", f), f)) {
-    fs.copyFileSync(path.join("schemas", f), path.join("stage", "schemas", f));
+for (const full of listFilesRecursive("schemas")) {
+  const name = path.basename(full);
+  if (schemaFilter(full, name)) {
+    fs.copyFileSync(full, path.join("stage", "schemas", name));
   }
 }
 

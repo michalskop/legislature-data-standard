@@ -4,6 +4,21 @@ const $RefParser = require("@apidevtools/json-schema-ref-parser");
 
 const branch = process.env.STD_BRANCH || "";
 
+function listSchemaJsonFiles(dir) {
+  const out = [];
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, ent.name);
+    if (ent.isDirectory()) {
+      out.push(...listSchemaJsonFiles(full));
+    } else if (ent.isFile()) {
+      if (ent.name.endsWith(".json") && !ent.name.endsWith(".table.json")) {
+        out.push(full);
+      }
+    }
+  }
+  return out;
+}
+
 function pickFiles(all) {
   if (branch === "popolo") {
     return all.filter(f => /\.popolo\.json$/.test(f));
@@ -24,18 +39,20 @@ function toKebab(s){ return s.replace(/([a-z])([A-Z])/g,"$1-$2").replace(/\./g,"
 
 (async () => {
   const version = process.env.STD_VERSION || "latest";
-  const filesAll = fs.readdirSync("schemas")
-    .filter(f => f.endsWith(".json") && !f.endsWith(".table.json"))
+  const filesAll = listSchemaJsonFiles("schemas")
+    .map(f => f.replace(/\\/g, "/"))
     .sort();
-  const files = pickFiles(filesAll);
+  const files = pickFiles(filesAll.map(f => path.basename(f))).map(name => name);
+
+  const selectedSet = new Set(files);
+  const selectedFullPaths = filesAll.filter(full => selectedSet.has(path.basename(full)));
 
   const components = {};
   const paths = {};
 
-  for (const f of files) {
-    const full = path.join("schemas", f);
+  for (const full of selectedFullPaths) {
     const deref = await $RefParser.dereference(full);
-    const title = titleFromJson(full) || path.basename(f, ".json");
+    const title = titleFromJson(full) || path.basename(full, ".json");
     components[title] = deref;
     const slug = toKebab(title);
     paths[`/_schemas/${slug}`] = {
@@ -58,5 +75,5 @@ function toKebab(s){ return s.replace(/([a-z])([A-Z])/g,"$1-$2").replace(/\./g,"
   };
 
   fs.writeFileSync("openapi.json", JSON.stringify(spec, null, 2));
-  console.log(`Wrote openapi.json for branch=${branch} version=${version} with ${files.length} schema(s).`);
+  console.log(`Wrote openapi.json for branch=${branch} version=${version} with ${selectedFullPaths.length} schema(s).`);
 })();

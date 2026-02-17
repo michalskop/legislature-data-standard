@@ -50,13 +50,26 @@ const SCHEMAS: SchemaItem[] = [
 const out = (p: string) => path.join(process.cwd(), p);
 const ensureDir = (d: string) => fs.mkdirSync(d, { recursive: true });
 
+ function schemaSubdir(fileBase: string) {
+   if (fileBase.endsWith(".popolo")) return "popolo";
+   if (fileBase.includes(".dt.")) return "dt.analyses";
+   if (fileBase.endsWith(".dt")) return "dt";
+   return "";
+ }
+
+ function schemaOutPath(fileBase: string, ext: string) {
+   const sub = schemaSubdir(fileBase);
+   return sub ? out(`schemas/${sub}/${fileBase}.${ext}`) : out(`schemas/${fileBase}.${ext}`);
+ }
+
 function writeJsonSchema(item: SchemaItem) {
   if (!item?.zod || !item?.zod._def) {
     throw new Error(`Schema "${item?.name}" is undefined or not a Zod schema.`);
   }
   const json = zodToJsonSchema(item.zod, { name: item.name });
-  ensureDir(out("schemas"));
-  fs.writeFileSync(out(`schemas/${item.fileBase}.json`), JSON.stringify(json, null, 2));
+  const p = schemaOutPath(item.fileBase, "json");
+  ensureDir(path.dirname(p));
+  fs.writeFileSync(p, JSON.stringify(json, null, 2));
   console.log(`✓ JSON  ${item.fileBase}.json`);
   return json;
 }
@@ -80,7 +93,9 @@ function writeMarkdown(item: SchemaItem, jsonSchema: any) {
 
 ${rows.join("\n")}
 `;
-  fs.writeFileSync(out(`schemas/${item.fileBase}.md`), md);
+  const p = schemaOutPath(item.fileBase, "md");
+  ensureDir(path.dirname(p));
+  fs.writeFileSync(p, md);
   console.log(`✓ MD    ${item.fileBase}.md`);
 }
 

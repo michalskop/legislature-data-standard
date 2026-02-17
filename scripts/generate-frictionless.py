@@ -105,9 +105,9 @@ if __name__ == "__main__":
     # Use a set to avoid duplicate processing
     json_schema_files = set()
 
-    # Add files from all patterns to the set
-    for pattern in ['*.dt.json', '*.popolo.json', '*.*.*.json']:
-        for file_path in glob.glob(os.path.join(schema_dir, pattern)):
+    # Add files from all patterns to the set (recursive)
+    for pattern in ['**/*.dt.json', '**/*.popolo.json', '**/*.*.*.json']:
+        for file_path in glob.glob(os.path.join(schema_dir, pattern), recursive=True):
             # Exclude the generated .table.json files
             if not file_path.endswith('.table.json'):
                 json_schema_files.add(file_path)
