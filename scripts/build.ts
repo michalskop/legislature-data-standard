@@ -29,6 +29,7 @@ import { DtVoteEventSchema } from "../schemas/vote-event.dt.schema";
 import { DtVoteEventsSchema } from "../schemas/vote-events.dt.schema";
 import { DtCountSchema } from "../schemas/count.dt.schema";
 import { DtVoteSchema } from "../schemas/vote.dt.schema";
+import { DtVotesTableRowSchema } from "../schemas/votes-table.dt.schema";
 import { DtAnalysesCurrentMembersSchema } from "../schemas/current-members.dt.analyses.schema";
 import { DtAnalysesCurrentTermSchema } from "../schemas/current-term.dt.analyses.schema";
 import { DtAnalysesAllMembersSchema } from "../schemas/all-members.dt.analyses.schema";
@@ -71,6 +72,7 @@ const SCHEMAS: SchemaItem[] = [
   { name: "DtVoteEvents",        fileBase: "vote-events.dt",       zod: DtVoteEventsSchema },
   { name: "DtCount",             fileBase: "count.dt",             zod: DtCountSchema },
   { name: "DtVote",              fileBase: "vote.dt",              zod: DtVoteSchema },
+  { name: "DtTableVotesRow",     fileBase: "votes-table.dt",       zod: DtVotesTableRowSchema },
   { name: "DtTablePersonsRow",   fileBase: "persons-table.dt",     zod: DtPersonsTableRowSchema },
   { name: "DtAnalysesCurrentMembers", fileBase: "current-members.dt.analyses", zod: DtAnalysesCurrentMembersSchema },
   { name: "DtAnalysesTableCurrentMembersRow", fileBase: "current-members-table.dt.analyses", zod: DtAnalysesCurrentMembersTableRowSchema },
