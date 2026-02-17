@@ -26,9 +26,13 @@ import { DtMembershipsSchema } from "../schemas/memberships.dt.schema";
 import { DtAnalysesCurrentMembersSchema } from "../schemas/current-members.dt.analyses.schema";
 import { DtAnalysesCurrentTermSchema } from "../schemas/current-term.dt.analyses.schema";
 import { DtAnalysesAllMembersSchema } from "../schemas/all-members.dt.analyses.schema";
+import { DtAnalysesCurrentGroupsSchema } from "../schemas/current-groups.dt.analyses.schema";
+import { DtAnalysesAllGroupsSchema } from "../schemas/all-groups.dt.analyses.schema";
 import { DtPersonsTableRowSchema } from "../schemas/persons-table.dt.schema";
 import { DtAnalysesCurrentMembersTableRowSchema } from "../schemas/current-members-table.dt.analyses.schema";
 import { DtAnalysesAllMembersTableRowSchema } from "../schemas/all-members-table.dt.analyses.schema";
+import { DtAnalysesCurrentGroupsTableRowSchema } from "../schemas/current-groups-table.dt.analyses.schema";
+import { DtAnalysesAllGroupsTableRowSchema } from "../schemas/all-groups-table.dt.analyses.schema";
 
 
 type SchemaItem = { name: string; fileBase: string; zod: any };
@@ -61,6 +65,10 @@ const SCHEMAS: SchemaItem[] = [
   { name: "DtAnalysesCurrentTerm", fileBase: "current-term.dt.analyses", zod: DtAnalysesCurrentTermSchema },
   { name: "DtAnalysesAllMembers", fileBase: "all-members.dt.analyses", zod: DtAnalysesAllMembersSchema },
   { name: "DtAnalysesTableAllMembersRow", fileBase: "all-members-table.dt.analyses", zod: DtAnalysesAllMembersTableRowSchema },
+  { name: "DtAnalysesCurrentGroups", fileBase: "current-groups.dt.analyses", zod: DtAnalysesCurrentGroupsSchema },
+  { name: "DtAnalysesTableCurrentGroupsRow", fileBase: "current-groups-table.dt.analyses", zod: DtAnalysesCurrentGroupsTableRowSchema },
+  { name: "DtAnalysesAllGroups", fileBase: "all-groups.dt.analyses", zod: DtAnalysesAllGroupsSchema },
+  { name: "DtAnalysesTableAllGroupsRow", fileBase: "all-groups-table.dt.analyses", zod: DtAnalysesAllGroupsTableRowSchema },
 ];
 
 const out = (p: string) => path.join(process.cwd(), p);

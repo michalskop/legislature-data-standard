@@ -76,6 +76,20 @@ jobs:
         env: { STD_BRANCH: dt.analyses/all-members, STD_VERSION: 0.1.0 }
         run: npm run release
 
+      - name: Build OpenAPI (DT analyses - current groups)
+        env: { STD_BRANCH: dt.analyses/current-groups, STD_VERSION: 0.1.0 }
+        run: npm run build:openapi
+      - name: Release (DT analyses - current groups)
+        env: { STD_BRANCH: dt.analyses/current-groups, STD_VERSION: 0.1.0 }
+        run: npm run release
+
+      - name: Build OpenAPI (DT analyses - all groups)
+        env: { STD_BRANCH: dt.analyses/all-groups, STD_VERSION: 0.1.0 }
+        run: npm run build:openapi
+      - name: Release (DT analyses - all groups)
+        env: { STD_BRANCH: dt.analyses/all-groups, STD_VERSION: 0.1.0 }
+        run: npm run release
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with: { path: dist }
