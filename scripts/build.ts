@@ -24,6 +24,7 @@ import { DtOrganizationsSchema } from "../schemas/organizations.dt.schema";
 import { DtMembershipSchema } from "../schemas/membership.dt.schema";
 import { DtMembershipsSchema } from "../schemas/memberships.dt.schema";
 import { DtAnalysesCurrentMembersSchema } from "../schemas/current-members.dt.analyses.schema";
+import { DtAnalysesCurrentTermSchema } from "../schemas/current-term.dt.analyses.schema";
 import { DtPersonsTableRowSchema } from "../schemas/persons-table.dt.schema";
 import { DtAnalysesCurrentMembersTableRowSchema } from "../schemas/current-members-table.dt.analyses.schema";
 
@@ -55,6 +56,7 @@ const SCHEMAS: SchemaItem[] = [
   { name: "DtTablePersonsRow",   fileBase: "persons-table.dt",     zod: DtPersonsTableRowSchema },
   { name: "DtAnalysesCurrentMembers", fileBase: "current-members.dt.analyses", zod: DtAnalysesCurrentMembersSchema },
   { name: "DtAnalysesTableCurrentMembersRow", fileBase: "current-members-table.dt.analyses", zod: DtAnalysesCurrentMembersTableRowSchema },
+  { name: "DtAnalysesCurrentTerm", fileBase: "current-term.dt.analyses", zod: DtAnalysesCurrentTermSchema },
 ];
 
 const out = (p: string) => path.join(process.cwd(), p);
