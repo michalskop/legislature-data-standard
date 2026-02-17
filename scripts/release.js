@@ -120,6 +120,71 @@ function generateMainIndex() {
 }
 generateMainIndex();
 
+// Write index.html pages for intermediate directories like dist/dt.analyses/
+function generateIntermediateIndexes() {
+  function listBranchesRecursive(dir, baseRel = "") {
+    const out = [];
+    for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (!ent.isDirectory()) continue;
+      if (ent.name === "latest") continue;
+
+      const rel = baseRel ? path.posix.join(baseRel, ent.name) : ent.name;
+      const full = path.join(dir, ent.name);
+
+      if (fs.existsSync(path.join(full, "latest", "index.html"))) {
+        out.push(rel);
+      }
+      out.push(...listBranchesRecursive(full, rel));
+    }
+    return out;
+  }
+
+  const branches = listBranchesRecursive("dist").sort();
+  const parents = new Map();
+  const hasLatest = new Set(branches);
+
+  for (const b of branches) {
+    const parts = b.split("/");
+    if (parts.length < 2) continue;
+    const parent = parts.slice(0, -1).join("/");
+    const child = parts[parts.length - 1];
+    if (!parents.has(parent)) parents.set(parent, new Set());
+    parents.get(parent).add(child);
+  }
+
+  for (const [parent, children] of parents.entries()) {
+    const fullDir = path.join("dist", parent);
+    if (!fs.existsSync(fullDir)) continue;
+
+    const list = Array.from(children)
+      .sort()
+      .map((c) => {
+        const rel = `${parent}/${c}`;
+        const href = hasLatest.has(rel) ? `./${c}/latest/` : `./${c}/`;
+        const label = hasLatest.has(rel) ? `${c}/latest` : c;
+        return `<li><a href="${href}">${label}</a></li>`;
+      })
+      .join("\n");
+
+    const html = `<!DOCTYPE html>
+  <html lang="en">
+  <meta charset="utf-8">
+  <title>${parent}</title>
+  <body style="font-family: sans-serif; max-width: 700px; margin: 3em auto;">
+    <h1>${parent}</h1>
+    <ul>
+      ${list}
+    </ul>
+    <p style="margin-top:2em;font-size:90%;color:#555;">
+      <a href="../">Up</a> | <a href="/legislature-data-standard/">Home</a>
+    </p>
+  </body></html>`;
+
+    fs.writeFileSync(path.join(fullDir, "index.html"), html);
+  }
+}
+generateIntermediateIndexes();
+
 
 rimraf("stage");
 console.log(`Published branch=${branch} version=${version} to ${destVer} and ${destLatest}`);
