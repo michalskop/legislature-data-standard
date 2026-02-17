@@ -45,7 +45,11 @@ fs.copyFileSync(specFile, `stage/${specFile}`);
 // schema filter
 const schemaFilter = (full, name) => {
   if (branch === "popolo") return /\.popolo\.json$/.test(name);
-  if (branch.startsWith("dt")) return /\.popolo\.json$/.test(name) || /\.dt(\.|$)/.test(name);
+  if (branch === "dt") return /\.dt\.json$/.test(name);
+  if (branch.startsWith("dt.analyses/")) {
+    const analysis = branch.slice("dt.analyses/".length);
+    return name === `${analysis}.dt.analyses.json`;
+  }
   return true;
 };
 

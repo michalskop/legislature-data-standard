@@ -23,8 +23,12 @@ function pickFiles(all) {
   if (branch === "popolo") {
     return all.filter(f => /\.popolo\.json$/.test(f));
   }
-  if (branch.startsWith("dt")) {
-    return all.filter(f => /\.popolo\.json$/.test(f) || /\.dt(\.|$)/.test(f));
+  if (branch === "dt") {
+    return all.filter(f => /\.dt\.json$/.test(f));
+  }
+  if (branch.startsWith("dt.analyses/")) {
+    const analysis = branch.slice("dt.analyses/".length);
+    return all.filter(f => f === `${analysis}.dt.analyses.json`);
   }
   // default: include everything (fallback)
   return all;
