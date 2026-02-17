@@ -131,7 +131,7 @@ function generateMainIndex() {
   const list = uniqueBranches
     .map((b) => {
       if (b === "dt.analyses") return `<li><a href="./dt.analyses/">dt.analyses/</a></li>`;
-      return `<li><a href="./${b}/latest/">${b}/latest</a></li>`;
+      return `<li><a href="./${b}/latest/">${b}/latest</a> — <a href="./${b}/latest/schemas/">schemas</a></li>`;
     })
     .join("\n");
 
@@ -195,9 +195,11 @@ function generateIntermediateIndexes() {
       .sort()
       .map((c) => {
         const rel = `${parent}/${c}`;
-        const href = hasLatest.has(rel) ? `./${c}/latest/` : `./${c}/`;
-        const label = hasLatest.has(rel) ? `${c}/latest` : c;
-        return `<li><a href="${href}">${label}</a></li>`;
+        const has = hasLatest.has(rel);
+        const href = has ? `./${c}/latest/` : `./${c}/`;
+        const label = has ? `${c}/latest` : c;
+        const schemasLink = has ? ` — <a href="./${c}/latest/schemas/">schemas</a>` : "";
+        return `<li><a href="${href}">${label}</a>${schemasLink}</li>`;
       })
       .join("\n");
 
