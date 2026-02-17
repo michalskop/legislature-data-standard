@@ -79,22 +79,23 @@ function examplesForTitle(title) {
     const deref = await $RefParser.dereference(full);
     const title = titleFromJson(full) || path.basename(full, ".json");
     components[title] = deref;
-    const slug = toKebab(title);
+    const fileName = path.basename(full);
     const examples = examplesForTitle(title);
-    paths[`/_schemas/${slug}`] = {
+    paths[`/schemas/${fileName}`] = {
       get: {
-        summary: `Schema: ${title}`,
+        summary: `Schema file: ${fileName}`,
         responses: { "200": { description: "OK", content: { "application/json": { schema: { $ref: `#/components/schemas/${title}` } } } } }
       }
     };
 
     if (examples) {
-      paths[`/_schemas/${slug}`].get.responses["200"].content["application/json"].examples = examples;
+      paths[`/schemas/${fileName}`].get.responses["200"].content["application/json"].examples = examples;
     }
   }
 
   const spec = {
     openapi: "3.0.3",
+    servers: [{ url: "." }],
     info: {
       title: "Legislature Data Standard",
       version,
