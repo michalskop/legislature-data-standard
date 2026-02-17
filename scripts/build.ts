@@ -25,8 +25,10 @@ import { DtMembershipSchema } from "../schemas/membership.dt.schema";
 import { DtMembershipsSchema } from "../schemas/memberships.dt.schema";
 import { DtAnalysesCurrentMembersSchema } from "../schemas/current-members.dt.analyses.schema";
 import { DtAnalysesCurrentTermSchema } from "../schemas/current-term.dt.analyses.schema";
+import { DtAnalysesAllMembersSchema } from "../schemas/all-members.dt.analyses.schema";
 import { DtPersonsTableRowSchema } from "../schemas/persons-table.dt.schema";
 import { DtAnalysesCurrentMembersTableRowSchema } from "../schemas/current-members-table.dt.analyses.schema";
+import { DtAnalysesAllMembersTableRowSchema } from "../schemas/all-members-table.dt.analyses.schema";
 
 
 type SchemaItem = { name: string; fileBase: string; zod: any };
@@ -57,6 +59,8 @@ const SCHEMAS: SchemaItem[] = [
   { name: "DtAnalysesCurrentMembers", fileBase: "current-members.dt.analyses", zod: DtAnalysesCurrentMembersSchema },
   { name: "DtAnalysesTableCurrentMembersRow", fileBase: "current-members-table.dt.analyses", zod: DtAnalysesCurrentMembersTableRowSchema },
   { name: "DtAnalysesCurrentTerm", fileBase: "current-term.dt.analyses", zod: DtAnalysesCurrentTermSchema },
+  { name: "DtAnalysesAllMembers", fileBase: "all-members.dt.analyses", zod: DtAnalysesAllMembersSchema },
+  { name: "DtAnalysesTableAllMembersRow", fileBase: "all-members-table.dt.analyses", zod: DtAnalysesAllMembersTableRowSchema },
 ];
 
 const out = (p: string) => path.join(process.cwd(), p);
