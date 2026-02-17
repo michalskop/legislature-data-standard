@@ -75,12 +75,30 @@ if (branch) {
 
 // Always write a main index listing all branches & versions
 function generateMainIndex() {
-  const branches = fs.readdirSync("dist")
-    .filter(f => fs.existsSync(path.join("dist", f, "latest", "index.html")))
-    .filter(f => !["latest"].includes(f));
+  function listBranchesRecursive(dir, baseRel = "") {
+    const out = [];
+    for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (!ent.isDirectory()) continue;
+      if (ent.name === "latest") continue;
 
-  const list = branches.map(b => 
-    `<li><a href="./${b}/latest/">${b}/latest</a></li>`).join("\n");
+      const rel = baseRel ? path.posix.join(baseRel, ent.name) : ent.name;
+      const full = path.join(dir, ent.name);
+
+      if (fs.existsSync(path.join(full, "latest", "index.html"))) {
+        out.push(rel);
+      }
+      out.push(...listBranchesRecursive(full, rel));
+    }
+    return out;
+  }
+
+  const branches = listBranchesRecursive("dist")
+    .filter(b => b !== "latest")
+    .sort();
+
+  const list = branches
+    .map(b => `<li><a href="./${b}/latest/">${b}/latest</a></li>`)
+    .join("\n");
 
   const html = `<!DOCTYPE html>
   <html lang="en">
