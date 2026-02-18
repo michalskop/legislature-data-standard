@@ -7,6 +7,8 @@ const DtAttendanceOrganizationSchema = z.object({
   name: z.string().optional(),
   classification: z.string().optional(),
   parent_id: z.string().optional(),
+  since: z.string().date().optional().nullable().describe("ISO 8601 date (YYYY-MM-DD). Start of membership in this organization."),
+  until: z.string().date().optional().nullable().describe("ISO 8601 date (YYYY-MM-DD). End of membership in this organization. Null/omitted if current."),
 });
 
 export const DtAnalysesAttendanceRowSchema = z.object({
