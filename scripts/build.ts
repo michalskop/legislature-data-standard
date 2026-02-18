@@ -42,7 +42,7 @@ import { DtAnalysesCurrentGroupsTableRowSchema } from "../schemas/current-groups
 import { DtAnalysesAllGroupsTableRowSchema } from "../schemas/all-groups-table.dt.analyses.schema";
 import { DtAnalysesAttendanceDefinitionSchema } from "../schemas/attendance-definition.dt.analyses.schema";
 import { DtAnalysesAttendanceDefinitionTableRowSchema } from "../schemas/attendance-definition-table.dt.analyses.schema";
-import { DtAnalysesAttendanceOutputSchema } from "../schemas/attendance.dt.analyses.schema";
+import { DtAnalysesAttendanceSchema } from "../schemas/attendance.dt.analyses.schema";
 import { DtAnalysesAttendanceTableRowSchema } from "../schemas/attendance-table.dt.analyses.schema";
 
 
@@ -89,7 +89,7 @@ const SCHEMAS: SchemaItem[] = [
   { name: "DtAnalysesTableAllGroupsRow", fileBase: "all-groups-table.dt.analyses", zod: DtAnalysesAllGroupsTableRowSchema },
   { name: "DtAnalysesAttendanceDefinition", fileBase: "attendance-definition.dt.analyses", zod: DtAnalysesAttendanceDefinitionSchema },
   { name: "DtAnalysesTableAttendanceDefinitionRow", fileBase: "attendance-definition-table.dt.analyses", zod: DtAnalysesAttendanceDefinitionTableRowSchema },
-  { name: "DtAnalysesAttendance", fileBase: "attendance.dt.analyses", zod: DtAnalysesAttendanceOutputSchema },
+  { name: "DtAnalysesAttendance", fileBase: "attendance.dt.analyses", zod: DtAnalysesAttendanceSchema },
   { name: "DtAnalysesTableAttendanceRow", fileBase: "attendance-table.dt.analyses", zod: DtAnalysesAttendanceTableRowSchema },
 ];
 
