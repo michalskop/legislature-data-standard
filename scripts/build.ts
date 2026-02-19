@@ -44,6 +44,8 @@ import { DtAnalysesAttendanceDefinitionSchema } from "../schemas/attendance-defi
 import { DtAnalysesAttendanceDefinitionTableRowSchema } from "../schemas/attendance-definition-table.dt.analyses.schema";
 import { DtAnalysesAttendanceSchema } from "../schemas/attendance.dt.analyses.schema";
 import { DtAnalysesAttendanceTableRowSchema } from "../schemas/attendance-table.dt.analyses.schema";
+import { DtVoteEventObjectionSchema } from "../schemas/vote-event-objection.dt.schema";
+import { DtVoteEventObjectionsSchema } from "../schemas/vote-event-objections.dt.schema";
 
 
 type SchemaItem = { name: string; fileBase: string; zod: any };
@@ -91,6 +93,8 @@ const SCHEMAS: SchemaItem[] = [
   { name: "DtAnalysesTableAttendanceDefinitionRow", fileBase: "attendance-definition-table.dt.analyses", zod: DtAnalysesAttendanceDefinitionTableRowSchema },
   { name: "DtAnalysesAttendance", fileBase: "attendance.dt.analyses", zod: DtAnalysesAttendanceSchema },
   { name: "DtAnalysesTableAttendanceRow", fileBase: "attendance-table.dt.analyses", zod: DtAnalysesAttendanceTableRowSchema },
+  { name: "DtVoteEventObjection",  fileBase: "vote-event-objection.dt",  zod: DtVoteEventObjectionSchema },
+  { name: "DtVoteEventObjections", fileBase: "vote-event-objections.dt", zod: DtVoteEventObjectionsSchema },
 ];
 
 const out = (p: string) => path.join(process.cwd(), p);
