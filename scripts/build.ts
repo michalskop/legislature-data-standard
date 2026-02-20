@@ -46,9 +46,12 @@ import { DtAnalysesAttendanceSchema } from "../schemas/attendance.dt.analyses.sc
 import { DtAnalysesAttendanceTableRowSchema } from "../schemas/attendance-table.dt.analyses.schema";
 import { DtVoteEventObjectionSchema } from "../schemas/vote-event-objection.dt.schema";
 import { DtVoteEventObjectionsSchema } from "../schemas/vote-event-objections.dt.schema";
-import { DtAnalysesRebelityGovityDefinitionSchema } from "../schemas/rebelity-govity-definition.dt.analyses.schema";
-import { DtAnalysesRebelityGovitySchema } from "../schemas/rebelity-govity.dt.analyses.schema";
-import { DtAnalysesRebelityGovityTableRowSchema } from "../schemas/rebelity-govity-table.dt.analyses.schema";
+import { DtAnalysesRebelityDefinitionSchema } from "../schemas/rebelity-definition.dt.analyses.schema";
+import { DtAnalysesRebelitySchema } from "../schemas/rebelity.dt.analyses.schema";
+import { DtAnalysesRebelityTableRowSchema } from "../schemas/rebelity-table.dt.analyses.schema";
+import { DtAnalysesGovityDefinitionSchema } from "../schemas/govity-definition.dt.analyses.schema";
+import { DtAnalysesGovitySchema } from "../schemas/govity.dt.analyses.schema";
+import { DtAnalysesGovityTableRowSchema } from "../schemas/govity-table.dt.analyses.schema";
 
 
 type SchemaItem = { name: string; fileBase: string; zod: any };
@@ -98,9 +101,12 @@ const SCHEMAS: SchemaItem[] = [
   { name: "DtAnalysesTableAttendanceRow", fileBase: "attendance-table.dt.analyses", zod: DtAnalysesAttendanceTableRowSchema },
   { name: "DtVoteEventObjection",  fileBase: "vote-event-objection.dt",  zod: DtVoteEventObjectionSchema },
   { name: "DtVoteEventObjections", fileBase: "vote-event-objections.dt", zod: DtVoteEventObjectionsSchema },
-  { name: "DtAnalysesRebelityGovityDefinition", fileBase: "rebelity-govity-definition.dt.analyses", zod: DtAnalysesRebelityGovityDefinitionSchema },
-  { name: "DtAnalysesRebelityGovity",           fileBase: "rebelity-govity.dt.analyses",            zod: DtAnalysesRebelityGovitySchema },
-  { name: "DtAnalysesTableRebelityGovityRow",   fileBase: "rebelity-govity-table.dt.analyses",      zod: DtAnalysesRebelityGovityTableRowSchema },
+  { name: "DtAnalysesRebelityDefinition",      fileBase: "rebelity-definition.dt.analyses",  zod: DtAnalysesRebelityDefinitionSchema },
+  { name: "DtAnalysesRebelity",               fileBase: "rebelity.dt.analyses",             zod: DtAnalysesRebelitySchema },
+  { name: "DtAnalysesTableRebelityRow",       fileBase: "rebelity-table.dt.analyses",       zod: DtAnalysesRebelityTableRowSchema },
+  { name: "DtAnalysesGovityDefinition",       fileBase: "govity-definition.dt.analyses",    zod: DtAnalysesGovityDefinitionSchema },
+  { name: "DtAnalysesGovity",                 fileBase: "govity.dt.analyses",               zod: DtAnalysesGovitySchema },
+  { name: "DtAnalysesTableGovityRow",         fileBase: "govity-table.dt.analyses",         zod: DtAnalysesGovityTableRowSchema },
 ];
 
 const out = (p: string) => path.join(process.cwd(), p);

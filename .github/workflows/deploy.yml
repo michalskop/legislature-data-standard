@@ -104,18 +104,32 @@ jobs:
         env: { STD_BRANCH: dt.analyses/attendance, STD_VERSION: 0.1.0 }
         run: npm run release
 
-      - name: Build OpenAPI (DT analyses - rebelity-govity definition)
-        env: { STD_BRANCH: dt.analyses/rebelity-govity-definition, STD_VERSION: 0.1.0 }
+      - name: Build OpenAPI (DT analyses - rebelity definition)
+        env: { STD_BRANCH: dt.analyses/rebelity-definition, STD_VERSION: 0.1.0 }
         run: npm run build:openapi
-      - name: Release (DT analyses - rebelity-govity definition)
-        env: { STD_BRANCH: dt.analyses/rebelity-govity-definition, STD_VERSION: 0.1.0 }
+      - name: Release (DT analyses - rebelity definition)
+        env: { STD_BRANCH: dt.analyses/rebelity-definition, STD_VERSION: 0.1.0 }
         run: npm run release
 
-      - name: Build OpenAPI (DT analyses - rebelity-govity)
-        env: { STD_BRANCH: dt.analyses/rebelity-govity, STD_VERSION: 0.1.0 }
+      - name: Build OpenAPI (DT analyses - rebelity)
+        env: { STD_BRANCH: dt.analyses/rebelity, STD_VERSION: 0.1.0 }
         run: npm run build:openapi
-      - name: Release (DT analyses - rebelity-govity)
-        env: { STD_BRANCH: dt.analyses/rebelity-govity, STD_VERSION: 0.1.0 }
+      - name: Release (DT analyses - rebelity)
+        env: { STD_BRANCH: dt.analyses/rebelity, STD_VERSION: 0.1.0 }
+        run: npm run release
+
+      - name: Build OpenAPI (DT analyses - govity definition)
+        env: { STD_BRANCH: dt.analyses/govity-definition, STD_VERSION: 0.1.0 }
+        run: npm run build:openapi
+      - name: Release (DT analyses - govity definition)
+        env: { STD_BRANCH: dt.analyses/govity-definition, STD_VERSION: 0.1.0 }
+        run: npm run release
+
+      - name: Build OpenAPI (DT analyses - govity)
+        env: { STD_BRANCH: dt.analyses/govity, STD_VERSION: 0.1.0 }
+        run: npm run build:openapi
+      - name: Release (DT analyses - govity)
+        env: { STD_BRANCH: dt.analyses/govity, STD_VERSION: 0.1.0 }
         run: npm run release
 
       - name: Upload artifact
