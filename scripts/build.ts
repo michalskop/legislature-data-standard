@@ -52,6 +52,11 @@ import { DtAnalysesRebelityTableRowSchema } from "../schemas/rebelity-table.dt.a
 import { DtAnalysesGovityDefinitionSchema } from "../schemas/govity-definition.dt.analyses.schema";
 import { DtAnalysesGovitySchema } from "../schemas/govity.dt.analyses.schema";
 import { DtAnalysesGovityTableRowSchema } from "../schemas/govity-table.dt.analyses.schema";
+import { DtAnalysesWpcaDefinitionSchema } from "../schemas/wpca-definition.dt.analyses.schema";
+import { DtAnalysesWpcaSchema } from "../schemas/wpca.dt.analyses.schema";
+import { DtAnalysesWpcaTableRowSchema } from "../schemas/wpca-table.dt.analyses.schema";
+import { DtAnalysesWpcaTimeSchema } from "../schemas/wpca-time.dt.analyses.schema";
+import { DtAnalysesWpcaTimeTableRowSchema } from "../schemas/wpca-time-table.dt.analyses.schema";
 
 
 type SchemaItem = { name: string; fileBase: string; zod: any };
@@ -107,6 +112,11 @@ const SCHEMAS: SchemaItem[] = [
   { name: "DtAnalysesGovityDefinition",       fileBase: "govity-definition.dt.analyses",    zod: DtAnalysesGovityDefinitionSchema },
   { name: "DtAnalysesGovity",                 fileBase: "govity.dt.analyses",               zod: DtAnalysesGovitySchema },
   { name: "DtAnalysesTableGovityRow",         fileBase: "govity-table.dt.analyses",         zod: DtAnalysesGovityTableRowSchema },
+  { name: "DtAnalysesWpcaDefinition",         fileBase: "wpca-definition.dt.analyses",      zod: DtAnalysesWpcaDefinitionSchema },
+  { name: "DtAnalysesWpca",                   fileBase: "wpca.dt.analyses",                 zod: DtAnalysesWpcaSchema },
+  { name: "DtAnalysesTableWpcaRow",           fileBase: "wpca-table.dt.analyses",           zod: DtAnalysesWpcaTableRowSchema },
+  { name: "DtAnalysesWpcaTime",               fileBase: "wpca-time.dt.analyses",            zod: DtAnalysesWpcaTimeSchema },
+  { name: "DtAnalysesTableWpcaTimeRow",       fileBase: "wpca-time-table.dt.analyses",      zod: DtAnalysesWpcaTimeTableRowSchema },
 ];
 
 const out = (p: string) => path.join(process.cwd(), p);

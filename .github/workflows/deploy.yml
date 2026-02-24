@@ -132,6 +132,27 @@ jobs:
         env: { STD_BRANCH: dt.analyses/govity, STD_VERSION: 0.1.0 }
         run: npm run release
 
+      - name: Build OpenAPI (DT analyses - wpca definition)
+        env: { STD_BRANCH: dt.analyses/wpca-definition, STD_VERSION: 0.1.0 }
+        run: npm run build:openapi
+      - name: Release (DT analyses - wpca definition)
+        env: { STD_BRANCH: dt.analyses/wpca-definition, STD_VERSION: 0.1.0 }
+        run: npm run release
+
+      - name: Build OpenAPI (DT analyses - wpca)
+        env: { STD_BRANCH: dt.analyses/wpca, STD_VERSION: 0.1.0 }
+        run: npm run build:openapi
+      - name: Release (DT analyses - wpca)
+        env: { STD_BRANCH: dt.analyses/wpca, STD_VERSION: 0.1.0 }
+        run: npm run release
+
+      - name: Build OpenAPI (DT analyses - wpca time)
+        env: { STD_BRANCH: dt.analyses/wpca-time, STD_VERSION: 0.1.0 }
+        run: npm run build:openapi
+      - name: Release (DT analyses - wpca time)
+        env: { STD_BRANCH: dt.analyses/wpca-time, STD_VERSION: 0.1.0 }
+        run: npm run release
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with: { path: dist }
