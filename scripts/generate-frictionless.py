@@ -38,6 +38,11 @@ def convert_property_to_field(prop_name, prop_schema, required_fields):
     else:
         json_type = prop_schema.get('type', 'string')
         json_format = prop_schema.get('format')
+        # JSON Schema allows type as an array, e.g. ["string", "null"] for
+        # nullable fields. Extract the first non-null type in that case.
+        if isinstance(json_type, list):
+            non_null = [t for t in json_type if t != 'null']
+            json_type = non_null[0] if non_null else 'string'
 
     # Set type and format
     if json_format in FORMAT_MAPPING:
